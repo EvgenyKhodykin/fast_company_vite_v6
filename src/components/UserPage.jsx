@@ -14,12 +14,12 @@ function UserPage({ id }) {
     }, [])
 
     const handleUsers = () => {
-        navigate('/users')
+        navigate('/users', { replace: true })
     }
 
     if (user) {
         return (
-            <div className='m-2'>
+            <div className='ms-3'>
                 <h1>{user.name}</h1>
                 <h3>Профессия: {user.profession.name}</h3>
                 <QualitiesList {...user} />

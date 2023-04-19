@@ -4,8 +4,8 @@ import UserPage from '../components/UserPage'
 import UsersList from '../components/UsersList'
 
 function UsersLayout() {
-    const params = useParams()
-    const { userId } = params
+    const { userId } = useParams()
+
     return <>{userId ? <UserPage id={userId} /> : <UsersList />}</>
 }
 

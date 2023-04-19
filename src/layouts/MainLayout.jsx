@@ -5,8 +5,12 @@ import NavBar from '../components/NavBar'
 function MainLayout() {
     return (
         <>
-            <NavBar />
-            <Outlet />
+            <header>
+                <NavBar />
+            </header>
+            <main>
+                <Outlet />
+            </main>
         </>
     )
 }
