@@ -7,6 +7,7 @@ import GroupList from './GroupList'
 import API from '../api'
 import SearchStatus from './SearchStatus'
 import UserTable from './UsersTable'
+import Loading from './Loading'
 
 function UsersList() {
     const [users, setUsers] = useState()
@@ -112,7 +113,7 @@ function UsersList() {
             </div>
         )
     }
-    return 'Loading...'
+    return <Loading />
 }
 
 UsersList.propTypes = {

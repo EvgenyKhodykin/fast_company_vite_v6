@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { useNavigate } from 'react-router-dom'
 import QualitiesList from './QualitiesList'
 import API from '../api'
+import Loading from './Loading'
 
 function UserPage({ id }) {
     const [user, setUser] = useState()
@@ -30,7 +31,7 @@ function UserPage({ id }) {
             </div>
         )
     }
-    return <h1>Loading...</h1>
+    return <Loading />
 }
 
 UserPage.propTypes = {
