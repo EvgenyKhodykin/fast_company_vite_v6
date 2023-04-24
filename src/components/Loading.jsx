@@ -1,12 +1,12 @@
-import * as React from 'react'
-import CircularProgress from '@mui/material/CircularProgress'
-import Box from '@mui/material/Box'
+import React from 'react'
 
 function Loading() {
     return (
-        <Box sx={{ display: 'flex', ml: 10 }}>
-            <CircularProgress />
-        </Box>
+        <button className='btn btn-primary ms-5' type='button' disabled>
+            <span className='spinner-grow spinner-grow-sm' role='status' aria-hidden='true'></span>
+            {'  '}
+            Loading...
+        </button>
     )
 }
 
