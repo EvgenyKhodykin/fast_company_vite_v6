@@ -17,6 +17,9 @@ function LoginLayout() {
         email: {
             isRequired: {
                 message: 'Поле Email обязательно для заполнения'
+            },
+            isEmail: {
+                message: 'Email введён некорректно'
             }
         },
         password: {

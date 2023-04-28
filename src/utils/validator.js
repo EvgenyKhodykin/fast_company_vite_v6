@@ -7,6 +7,12 @@ function validator(data, config) {
                 if (data.trim() === '') return config.message
                 break
 
+            case 'isEmail': {
+                const emailRegExp = /^\S+@\S+\.\S+$/g
+                if (!emailRegExp.test(data)) return config.message
+                break
+            }
+
             default:
                 break
         }
@@ -19,7 +25,7 @@ function validator(data, config) {
                 data[fieldName],
                 config[fieldName][vaildateMethod]
             )
-            if (error) {
+            if (error && !errors[fieldName]) {
                 errors[fieldName] = error
             }
         }
