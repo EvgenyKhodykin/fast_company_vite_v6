@@ -1,5 +1,6 @@
 import { React, useEffect, useState } from 'react'
 import TextField from '../components/TextField'
+import validator from '../utils/validator'
 
 function LoginLayout() {
     const [data, setData] = useState({ email: '', password: '' })
@@ -12,17 +13,25 @@ function LoginLayout() {
         }))
     }
 
+    const validatorConfig = {
+        email: {
+            isRequired: {
+                message: 'Поле Email обязательно для заполнения'
+            }
+        },
+        password: {
+            isRequired: {
+                message: 'Поле Пароль обязательно для заполнения'
+            }
+        }
+    }
+
     useEffect(() => {
         validate()
     }, [data])
 
     const validate = () => {
-        const errors = {}
-        for (const fieldName in data) {
-            if (data[fieldName].trim() === '') {
-                errors[fieldName] = `Поле ${fieldName} обязательно для заполнения`
-            }
-        }
+        const errors = validator(data, validatorConfig)
         setErrors(errors)
         return Object.keys(errors).length === 0
     }
