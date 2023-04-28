@@ -24,11 +24,14 @@ function LoginLayout() {
             }
         }
         setErrors(errors)
-        return Object.keys(errors).length === 0 || false
+        return Object.keys(errors).length === 0
     }
 
     const handleSubmit = event => {
         event.preventDefault()
+        const isValid = validate()
+        if (!isValid) return
+        console.log(data)
     }
 
     return (
@@ -48,7 +51,7 @@ function LoginLayout() {
                 onChange={handleChange}
                 error={errors.password}
             />
-            <button type='button'>Submit</button>
+            <button>Submit</button>
         </form>
     )
 }
