@@ -6,7 +6,10 @@ function LoginLayout() {
     const [errors, setErrors] = useState({})
 
     const handleChange = ({ target }) => {
-        setData(prevState => ({ ...prevState, [target.name]: target.value }))
+        setData(prevState => ({
+            ...prevState,
+            [target.name]: target.value
+        }))
     }
 
     useEffect(() => {
@@ -17,7 +20,7 @@ function LoginLayout() {
         const errors = {}
         for (const fieldName in data) {
             if (data[fieldName].trim() === '') {
-                errors[fieldName] = `${fieldName} обязательно для заполнения`
+                errors[fieldName] = `Поле ${fieldName} обязательно для заполнения`
             }
         }
         setErrors(errors)
