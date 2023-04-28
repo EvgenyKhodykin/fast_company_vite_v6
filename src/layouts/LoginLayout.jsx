@@ -29,9 +29,6 @@ function LoginLayout() {
 
     const handleSubmit = event => {
         event.preventDefault()
-        const isValid = validate()
-        if (!isValid) return
-        console.log(data)
     }
 
     return (
