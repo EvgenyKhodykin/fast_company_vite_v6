@@ -18,11 +18,13 @@ function validator(data, config) {
             case 'isCapitalSymbol': {
                 const capitalRegExp = /[A-Z]+/g
                 statusValidate = !capitalRegExp.test(data)
+                break
             }
 
             case 'isContainDigit': {
                 const digitRegExpo = /\d+/g
                 statusValidate = !digitRegExpo.test(data)
+                break
             }
 
             case 'min': {
