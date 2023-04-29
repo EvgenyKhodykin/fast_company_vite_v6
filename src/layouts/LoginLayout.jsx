@@ -1,8 +1,8 @@
 import React from 'react'
-import Login from '../components/Login'
+import LoginForm from '../components/LoginForm'
 
 function LoginLayout() {
-    return <Login />
+    return <LoginForm />
 }
 
 export default LoginLayout

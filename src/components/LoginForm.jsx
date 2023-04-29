@@ -2,7 +2,7 @@ import { React, useEffect, useState } from 'react'
 import TextField from './TextField'
 import validator from '../utils/validator'
 
-function Login() {
+function LoginForm() {
     const [data, setData] = useState({ email: '', password: '' })
     const [errors, setErrors] = useState({})
 
@@ -55,7 +55,7 @@ function Login() {
         event.preventDefault()
         const isValid = validate()
         if (!isValid) return
-        console.log(data)
+        return undefined
     }
 
     return (
@@ -92,4 +92,4 @@ function Login() {
     )
 }
 
-export default Login
+export default LoginForm
