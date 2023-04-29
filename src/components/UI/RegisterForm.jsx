@@ -3,9 +3,10 @@ import TextField from '../common/form/TextField'
 import validator from '../../utils/validator'
 import API from '../../api'
 import SelectField from '../common/form/SelectField'
+import RadioField from '../common/form/RadioField'
 
 function RegisterForm() {
-    const [data, setData] = useState({ email: '', password: '', profession: '' })
+    const [data, setData] = useState({ email: '', password: '', profession: '', sex: 'male' })
     const [errors, setErrors] = useState({})
     const [professions, setProfessions] = useState()
 
@@ -91,9 +92,18 @@ function RegisterForm() {
                 label='Profession'
                 onChange={handleChange}
                 options={professions}
-                defaultOption='choose...'
+                defaultOption='c hoose...'
                 error={errors.profession}
                 value={data.profession}
+            />
+            <RadioField
+                options={[
+                    { name: 'Male', value: 'male' },
+                    { name: 'Female', value: 'female' }
+                ]}
+                value={data.sex}
+                name='sex'
+                onChange={handleChange}
             />
             <button
                 disabled={!isValid}
