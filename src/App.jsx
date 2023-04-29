@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 import MainLayout from './layouts/MainLayout'
 import LoginLayout from './layouts/LoginLayout'
 import UsersLayout from './layouts/UsersLayout'
-import MainPage from './components/page/MainPage'
+import MainPage from './components/UI/MainPage'
 
 function App() {
     return (
@@ -18,7 +18,7 @@ function App() {
                         element={<MainPage />}
                     />
                     <Route
-                        path='login'
+                        path='login/:type?'
                         element={<LoginLayout />}
                     />
                     <Route

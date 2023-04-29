@@ -1,8 +1,8 @@
-import { React, useEffect, useState } from 'react'
+import { React, useState, useEffect } from 'react'
 import TextField from '../common/form/TextField'
 import validator from '../../utils/validator'
 
-function LoginForm() {
+function RegisterForm() {
     const [data, setData] = useState({ email: '', password: '' })
     const [errors, setErrors] = useState({})
 
@@ -85,4 +85,4 @@ function LoginForm() {
     )
 }
 
-export default LoginForm
+export default RegisterForm
