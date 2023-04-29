@@ -8,6 +8,7 @@ import API from '../api'
 import SearchStatus from './SearchStatus'
 import UserTable from './UsersTable'
 import Loading from './Loading'
+import SearchString from './SearchString'
 
 function UsersList() {
     const [users, setUsers] = useState()
@@ -15,6 +16,7 @@ function UsersList() {
     const [professions, setProfessions] = useState()
     const [selectedProf, setSelectedProf] = useState()
     const [sortBy, setSortBy] = useState({ iter: 'name', order: 'asc' })
+    const [searchValue, setSearchValue] = useState('')
 
     const pageSize = 4
 
@@ -46,9 +48,10 @@ function UsersList() {
 
     useEffect(() => {
         setCurrentPage(1)
-    }, [selectedProf])
+    }, [selectedProf, searchValue])
 
     const handleProfessionSelect = item => {
+        setSearchValue('')
         setSelectedProf(item)
     }
 
@@ -60,10 +63,21 @@ function UsersList() {
         setSortBy(item)
     }
 
+    const handleSearch = ({ target }) => {
+        setSelectedProf(undefined)
+        setSearchValue(target.value)
+    }
+
     if (users) {
-        const filteredUsers = selectedProf
-            ? users.filter(user => user.profession._id === selectedProf._id)
-            : users
+        let filteredUsers = null
+
+        if (searchValue) {
+            filteredUsers = users.filter(user =>
+                user.name.toLowerCase().includes(searchValue.toLowerCase())
+            )
+        } else if (selectedProf) {
+            filteredUsers = users.filter(user => user.profession._id === selectedProf._id)
+        } else filteredUsers = users
 
         const count = filteredUsers.length
 
@@ -73,6 +87,7 @@ function UsersList() {
 
         const clearFilter = () => {
             setSelectedProf()
+            setSearchValue('')
         }
 
         return (
@@ -84,7 +99,10 @@ function UsersList() {
                             items={professions}
                             onItemSelect={handleProfessionSelect}
                         />
-                        <button className='btn btn-secondary m-2' onClick={clearFilter}>
+                        <button
+                            className='btn btn-secondary m-2'
+                            onClick={clearFilter}
+                        >
                             Очистить
                         </button>
                     </div>
@@ -92,6 +110,10 @@ function UsersList() {
 
                 <div className='d-flex flex-column'>
                     <SearchStatus length={count} />
+                    <SearchString
+                        onChange={handleSearch}
+                        value={searchValue}
+                    />
                     {count > 0 && (
                         <UserTable
                             users={userCrop}

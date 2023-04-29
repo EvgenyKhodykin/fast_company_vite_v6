@@ -62,7 +62,7 @@ function LoginLayout() {
         <div className='container mt-5'>
             <div className='row '>
                 <div className='col-md-6 offset-md-3 shadow p-4'>
-                    <h3 className='mb-4'>Login</h3>
+                    <h3 className='mb-4'>Autorization</h3>
                     <form onSubmit={handleSubmit}>
                         <TextField
                             label='Email'
@@ -72,7 +72,7 @@ function LoginLayout() {
                             error={errors.email}
                         />
                         <TextField
-                            label='Пароль'
+                            label='Password'
                             type='password'
                             name='password'
                             value={data.password}
