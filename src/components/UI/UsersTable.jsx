@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import BookMark from './BookMark'
-import QualitiesList from './QualitiesList'
-import Table from './Table'
+import BookMark from '../common/BookMark'
+import Qualities from './qualities'
+import Table from '../common/table'
 import { Link } from 'react-router-dom'
 
 function UserTable({ users, onSort, selectedSort, onToggleBookMark, onDelete }) {
@@ -14,7 +14,7 @@ function UserTable({ users, onSort, selectedSort, onToggleBookMark, onDelete }) 
         },
         qualities: {
             name: 'Качества',
-            component: user => <QualitiesList qualities={user.qualities} />
+            component: user => <Qualities qualities={user.qualities} />
         },
         profession: { path: 'profession.name', name: 'Профессия' },
         completedMeetings: { path: 'completedMeetings', name: 'Встретился, раз' },
@@ -30,14 +30,25 @@ function UserTable({ users, onSort, selectedSort, onToggleBookMark, onDelete }) 
         },
         delete: {
             component: user => (
-                <button type='button' className='btn btn-danger' onClick={() => onDelete(user._id)}>
+                <button
+                    type='button'
+                    className='btn btn-danger'
+                    onClick={() => onDelete(user._id)}
+                >
                     delete
                 </button>
             )
         }
     }
 
-    return <Table onSort={onSort} selectedSort={selectedSort} columns={columns} data={users} />
+    return (
+        <Table
+            onSort={onSort}
+            selectedSort={selectedSort}
+            columns={columns}
+            data={users}
+        />
+    )
 }
 
 UserTable.propTypes = {

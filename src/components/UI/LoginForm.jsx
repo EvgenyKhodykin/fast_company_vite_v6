@@ -1,6 +1,6 @@
 import { React, useEffect, useState } from 'react'
-import TextField from './TextField'
-import validator from '../utils/validator'
+import TextField from '../common/form/TextField'
+import validator from '../../utils/validator'
 
 function LoginForm() {
     const [data, setData] = useState({ email: '', password: '' })
