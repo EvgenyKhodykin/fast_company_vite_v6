@@ -50,7 +50,7 @@ function UsersList() {
     }, [selectedProf, searchValue])
 
     const handleProfessionSelect = item => {
-        setSearchValue('')
+        if (searchValue !== '') setSearchValue('')
         setSelectedProf(item)
     }
 
