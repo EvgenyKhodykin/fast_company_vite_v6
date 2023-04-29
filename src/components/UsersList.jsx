@@ -8,7 +8,6 @@ import API from '../api'
 import SearchStatus from './SearchStatus'
 import UserTable from './UsersTable'
 import Loading from './Loading'
-import SearchString from './SearchString'
 
 function UsersList() {
     const [users, setUsers] = useState()
@@ -110,10 +109,17 @@ function UsersList() {
 
                 <div className='d-flex flex-column'>
                     <SearchStatus length={count} />
-                    <SearchString
-                        onChange={handleSearch}
-                        value={searchValue}
-                    />
+                    <div className='container'>
+                        <i className='bi bi-search'> </i>
+                        <input
+                            type='text'
+                            placeholder='поиск...'
+                            className='w-50 border-0'
+                            style={{ outline: 'none' }}
+                            onChange={handleSearch}
+                            value={searchValue}
+                        />
+                    </div>
                     {count > 0 && (
                         <UserTable
                             users={userCrop}
