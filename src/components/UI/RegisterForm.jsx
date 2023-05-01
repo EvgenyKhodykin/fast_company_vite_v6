@@ -92,7 +92,7 @@ function RegisterForm() {
                 label='Profession'
                 onChange={handleChange}
                 options={professions}
-                defaultOption='c hoose...'
+                defaultOption='choose...'
                 error={errors.profession}
                 value={data.profession}
             />
