@@ -4,17 +4,26 @@ import validator from '../../utils/validator'
 import API from '../../api'
 import SelectField from '../common/form/SelectField'
 import RadioField from '../common/form/RadioField'
+import MultiSelectField from '../common/form/MultiSelectField'
 
 function RegisterForm() {
-    const [data, setData] = useState({ email: '', password: '', profession: '', sex: 'male' })
+    const [data, setData] = useState({
+        email: '',
+        password: '',
+        profession: '',
+        sex: 'male',
+        qualities: []
+    })
     const [errors, setErrors] = useState({})
     const [professions, setProfessions] = useState()
+    const [qualities, setQualities] = useState({})
 
     useEffect(() => {
         API.professions.fetchAll().then(data => setProfessions(data))
+        API.qualities.fetchAll().then(data => setQualities(data))
     }, [])
 
-    const handleChange = ({ target }) => {
+    const handleChange = target => {
         setData(prevState => ({
             ...prevState,
             [target.name]: target.value
@@ -104,6 +113,13 @@ function RegisterForm() {
                 value={data.sex}
                 name='sex'
                 onChange={handleChange}
+                label='Sex'
+            />
+            <MultiSelectField
+                onChange={handleChange}
+                options={qualities}
+                name='qualities'
+                label='Qualities'
             />
             <button
                 disabled={!isValid}
