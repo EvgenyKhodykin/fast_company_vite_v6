@@ -53,5 +53,3 @@ export function LoginLayout() {
         </div>
     )
 }
-
-// export default LoginLayout

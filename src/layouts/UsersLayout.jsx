@@ -8,5 +8,3 @@ export function UsersLayout() {
 
     return <>{userId ? <UserPage id={userId} /> : <UsersListPage />}</>
 }
-
-// export default UsersLayout
