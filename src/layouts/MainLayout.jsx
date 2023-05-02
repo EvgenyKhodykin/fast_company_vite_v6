@@ -2,7 +2,7 @@ import React from 'react'
 import { Outlet } from 'react-router-dom'
 import NavBar from '../components/UI/NavBar'
 
-function MainLayout() {
+export function MainLayout() {
     return (
         <>
             <header>
@@ -15,4 +15,4 @@ function MainLayout() {
     )
 }
 
-export default MainLayout
+// export default MainLayout

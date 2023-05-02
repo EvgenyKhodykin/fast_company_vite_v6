@@ -1,8 +1,7 @@
 import { React } from 'react'
 import { Routes, Route } from 'react-router-dom'
-import MainLayout from './layouts/MainLayout'
-import LoginLayout from './layouts/LoginLayout'
-import UsersLayout from './layouts/UsersLayout'
+import { MainLayout, LoginLayout, UsersLayout } from './layouts'
+import { UserPageEdit } from './components/page/userPage'
 import MainPage from './components/UI/MainPage'
 
 function App() {
@@ -24,6 +23,10 @@ function App() {
                     <Route
                         path='users/:userId?'
                         element={<UsersLayout />}
+                    />
+                    <Route
+                        path='users/:userId/edit'
+                        element={<UserPageEdit />}
                     />
                 </Route>
             </Routes>

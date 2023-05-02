@@ -9,7 +9,7 @@ import SearchStatus from '../../UI/SearchStatus'
 import UserTable from '../../UI/UsersTable'
 import Loading from '../../UI/Loading'
 
-function UsersListPage() {
+export function UsersListPage() {
     const [users, setUsers] = useState()
     const [currentPage, setCurrentPage] = useState(1)
     const [professions, setProfessions] = useState()
@@ -75,12 +75,18 @@ function UsersListPage() {
                 user.name.toLowerCase().includes(searchValue.toLowerCase())
             )
         } else if (selectedProf) {
-            filteredUsers = users.filter(user => user.profession._id === selectedProf._id)
+            filteredUsers = users.filter(
+                user => user.profession._id === selectedProf._id
+            )
         } else filteredUsers = users
 
         const count = filteredUsers.length
 
-        const sortedUsers = _.orderBy(filteredUsers, [sortBy.path], [sortBy.order])
+        const sortedUsers = _.orderBy(
+            filteredUsers,
+            [sortBy.path],
+            [sortBy.order]
+        )
 
         const userCrop = paginate(sortedUsers, currentPage, pageSize)
 
@@ -147,5 +153,3 @@ function UsersListPage() {
 UsersListPage.propTypes = {
     users: PropTypes.array
 }
-
-export default UsersListPage

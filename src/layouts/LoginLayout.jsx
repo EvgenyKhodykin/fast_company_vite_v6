@@ -3,12 +3,16 @@ import LoginForm from '../components/UI/LoginForm'
 import { useParams } from 'react-router-dom'
 import RegisterForm from '../components/UI/RegisterForm'
 
-function LoginLayout() {
+export function LoginLayout() {
     const { type } = useParams()
-    const [formType, setFormType] = useState(type === 'register' ? type : 'login')
+    const [formType, setFormType] = useState(
+        type === 'register' ? type : 'login'
+    )
 
     const toggleFormType = () => {
-        setFormType(prevState => (prevState === 'register' ? 'login' : 'register'))
+        setFormType(prevState =>
+            prevState === 'register' ? 'login' : 'register'
+        )
     }
 
     return (
@@ -50,4 +54,4 @@ function LoginLayout() {
     )
 }
 
-export default LoginLayout
+// export default LoginLayout

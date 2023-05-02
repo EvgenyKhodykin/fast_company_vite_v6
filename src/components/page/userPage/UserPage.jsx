@@ -1,21 +1,16 @@
 import { React, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Qualities from '../../UI/qualities'
 import API from '../../../api'
 import Loading from '../../UI/Loading'
 
-function UserPage({ id }) {
+export function UserPage({ id }) {
     const [user, setUser] = useState()
-    const navigate = useNavigate()
 
     useEffect(() => {
         API.users.getById(id).then(data => setUser(data))
     }, [])
-
-    const handleUsers = () => {
-        navigate('/users', { replace: true })
-    }
 
     if (user) {
         return (
@@ -25,12 +20,14 @@ function UserPage({ id }) {
                 <Qualities {...user} />
                 <div>completedMeetings: {user.completedMeetings}</div>
                 <h3>Rate: {user.rate}</h3>
-                <button
-                    className='btn btn-outline-primary'
-                    onClick={handleUsers}
+                <Link
+                    to={`/users/${id}/edit`}
+                    replace
                 >
-                    Все пользователи
-                </button>
+                    <button className='btn btn-outline-primary'>
+                        Изменить
+                    </button>
+                </Link>
             </div>
         )
     }
@@ -40,5 +37,3 @@ function UserPage({ id }) {
 UserPage.propTypes = {
     id: PropTypes.string
 }
-
-export default UserPage
