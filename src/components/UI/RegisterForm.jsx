@@ -111,6 +111,7 @@ function RegisterForm() {
                 defaultOption='choose...'
                 error={errors.profession}
                 value={data.profession}
+                name='profession '
             />
             <RadioField
                 options={[
@@ -126,7 +127,8 @@ function RegisterForm() {
                 onChange={handleChange}
                 options={qualities}
                 name='qualities'
-                label='Qualities '
+                label='Qualities'
+                defaultValue={data.qualities}
             />
             <CheckBoxField
                 value={data.licence}

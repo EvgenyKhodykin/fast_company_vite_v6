@@ -1,7 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-function SelectField({ label, value, onChange, defaultOption, options, error }) {
+function SelectField({
+    label,
+    value,
+    onChange,
+    defaultOption,
+    options,
+    error,
+    name
+}) {
     const handleChange = ({ target }) => {
         onChange({ name: target.name, value: target.value })
     }
@@ -22,15 +30,15 @@ function SelectField({ label, value, onChange, defaultOption, options, error }) 
     return (
         <div className='mb-4'>
             <label
-                htmlFor='validationCustom04'
+                htmlFor={name}
                 className='form-label'
             >
                 {label}
             </label>
             <select
                 className={getInputClasses()}
-                id='validationCustom04'
-                name='profession'
+                id={name}
+                name={name}
                 value={value}
                 onChange={handleChange}
                 style={{ color: 'lightgrey' }}
@@ -62,7 +70,8 @@ SelectField.propTypes = {
     label: PropTypes.string,
     value: PropTypes.string,
     onChange: PropTypes.func,
-    error: PropTypes.string
+    error: PropTypes.string,
+    name: PropTypes.string
 }
 
 export default SelectField
