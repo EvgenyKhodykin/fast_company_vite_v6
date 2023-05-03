@@ -41,14 +41,8 @@ function SelectField({
                 name={name}
                 value={value}
                 onChange={handleChange}
-                style={{ color: 'lightgrey' }}
             >
-                <option
-                    disabled
-                    value=''
-                >
-                    {defaultOption}
-                </option>
+                <option value=''>{defaultOption}</option>
                 {optionsArray &&
                     optionsArray.map(option => (
                         <option

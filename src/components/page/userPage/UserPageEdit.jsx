@@ -8,15 +8,31 @@ import MultiSelectField from '../../common/form/MultiSelectField'
 import Loading from '../../UI/Loading'
 
 export function UserPageEdit() {
-    const [users, setUsers] = useState()
+    const [user, setUser] = useState({
+        name: '',
+        email: '',
+        profession: '',
+        sex: 'male',
+        qualities: []
+    })
+    const [professions, setProfessions] = useState()
+    const [qualities, setQualities] = useState()
     const { userId } = useParams()
-    console.log(users, userId)
 
     useEffect(() => {
-        API.users.fetchAll().then(data => setUsers(data))
+        API.users.getById(userId).then(data => setUser(data))
+        API.professions.fetchAll().then(data => setProfessions(data))
+        API.qualities.fetchAll().then(data => setQualities(data))
     }, [])
 
-    if (users) {
+    const handleChange = event => {
+        setUser(prevState => ({
+            ...prevState,
+            [event.name]: event.value
+        }))
+    }
+
+    if (user) {
         return (
             <div className='container mt-5'>
                 <div className='row '>
@@ -24,14 +40,22 @@ export function UserPageEdit() {
                         <TextField
                             label='Имя'
                             name='name'
+                            value={user.name}
+                            onChange={handleChange}
                         />
                         <TextField
                             label='Электронная почта'
                             name='email'
+                            value={user.email}
+                            onChange={handleChange}
                         />
                         <SelectField
                             label='Выбери свою профессию'
-                            name='profession '
+                            name='profession'
+                            defaultOption={user.profession.name}
+                            value={user.profession.name}
+                            options={professions}
+                            onChange={handleChange}
                         />
                         <RadioField
                             options={[
@@ -40,12 +64,20 @@ export function UserPageEdit() {
                             ]}
                             name='sex'
                             label='Выберите пол'
+                            value={user.sex}
+                            onChange={handleChange}
                         />
                         <MultiSelectField
                             name='qualities'
                             label='Выберите качества'
+                            options={qualities}
+                            onChange={handleChange}
+                            defaultValue={user.qualities}
                         />
-                        <button className='btn btn-primary w-100 mx-auto'>
+                        <button
+                            className='btn btn-primary w-100 mx-auto'
+                            disabled
+                        >
                             Обновить
                         </button>
                     </div>

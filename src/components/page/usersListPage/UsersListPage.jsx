@@ -21,6 +21,7 @@ export function UsersListPage() {
 
     useEffect(() => {
         API.users.fetchAll().then(data => setUsers(data))
+        API.professions.fetchAll().then(data => setProfessions(data))
     }, [])
 
     const handleDelete = userId => {
@@ -40,10 +41,6 @@ export function UsersListPage() {
             })
         )
     }
-
-    useEffect(() => {
-        API.professions.fetchAll().then(data => setProfessions(data))
-    }, [])
 
     useEffect(() => {
         setCurrentPage(1)
