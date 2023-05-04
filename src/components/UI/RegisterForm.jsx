@@ -17,12 +17,49 @@ function RegisterForm() {
         licence: false
     })
     const [errors, setErrors] = useState({})
-    const [professions, setProfessions] = useState()
-    const [qualities, setQualities] = useState({})
+    const [professions, setProfession] = useState([])
+    const [qualities, setQualities] = useState([])
+
+    const getProfessionById = id => {
+        for (const prof of professions) {
+            if (prof.value === id) {
+                return { _id: prof.value, name: prof.label }
+            }
+        }
+    }
+
+    const getQualities = elements => {
+        const qualitiesArray = []
+        for (const elem of elements) {
+            for (const quality in qualities) {
+                if (elem.value === qualities[quality].value) {
+                    qualitiesArray.push({
+                        _id: qualities[quality].value,
+                        name: qualities[quality].label,
+                        color: qualities[quality].color
+                    })
+                }
+            }
+        }
+        return qualitiesArray
+    }
 
     useEffect(() => {
-        API.professions.fetchAll().then(data => setProfessions(data))
-        API.qualities.fetchAll().then(data => setQualities(data))
+        API.professions.fetchAll().then(data => {
+            const professionsList = Object.keys(data).map(professionName => ({
+                label: data[professionName].name,
+                value: data[professionName]._id
+            }))
+            setProfession(professionsList)
+        })
+        API.qualities.fetchAll().then(data => {
+            const qualitiesList = Object.keys(data).map(optionName => ({
+                value: data[optionName]._id,
+                label: data[optionName].name,
+                color: data[optionName].color
+            }))
+            setQualities(qualitiesList)
+        })
     }, [])
 
     const handleChange = target => {
@@ -71,20 +108,23 @@ function RegisterForm() {
     useEffect(() => {
         validate()
     }, [data])
-
     const validate = () => {
         const errors = validator(data, validatorConfig)
         setErrors(errors)
         return Object.keys(errors).length === 0
     }
-
     const isValid = Object.keys(errors).length === 0
 
     const handleSubmit = event => {
         event.preventDefault()
         const isValid = validate()
         if (!isValid) return
-        return undefined
+        const { profession, qualities } = data
+        console.log({
+            ...data,
+            profession: getProfessionById(profession),
+            qualities: getQualities(qualities)
+        })
     }
 
     return (
@@ -108,7 +148,7 @@ function RegisterForm() {
                 label='Profession'
                 onChange={handleChange}
                 options={professions}
-                defaultOption='choose...'
+                defaultOption='Choose...'
                 error={errors.profession}
                 value={data.profession}
                 name='profession '
@@ -139,6 +179,7 @@ function RegisterForm() {
                 Подтвердить <a>лицензионное соглашение</a>
             </CheckBoxField>
             <button
+                type='submit'
                 disabled={!isValid}
                 className='btn btn-primary w-100 mx-auto'
             >

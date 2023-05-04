@@ -12,7 +12,7 @@ function RadioField({ options, name, onChange, value, label }) {
             <div>
                 {options.map(option => (
                     <div
-                        key={option.name + '' + option.value}
+                        key={option.name + '_' + option.value}
                         className='form-check form-check-inline'
                     >
                         <input
@@ -26,7 +26,7 @@ function RadioField({ options, name, onChange, value, label }) {
                         />
                         <label
                             className='form-check-label'
-                            htmlFor={option.name + '' + option.value}
+                            htmlFor={option.name + '_' + option.value}
                         >
                             {option.name}
                         </label>

@@ -18,14 +18,18 @@ function SelectField({
         return 'form-select' + (error ? ' is-invalid' : '')
     }
 
-    let optionsArray = null
+    // let optionsArray = null
+    // if (!Array.isArray(options) && typeof options === 'object') {
+    //     optionsArray = Object.keys(options).map(optionName => ({
+    //         name: options[optionName].name,
+    //         value: options[optionName].name
+    //     }))
+    // } else optionsArray = options
 
-    if (!Array.isArray(options) && typeof options === 'object') {
-        optionsArray = Object.keys(options).map(optionName => ({
-            name: options[optionName].name,
-            value: options[optionName]._id
-        }))
-    } else optionsArray = options
+    const optionsArray =
+        !Array.isArray(options) && typeof options === 'object'
+            ? Object.values(options)
+            : options
 
     return (
         <div className='mb-4'>
@@ -42,11 +46,16 @@ function SelectField({
                 value={value}
                 onChange={handleChange}
             >
-                <option value=''>{defaultOption}</option>
+                <option
+                    disabled
+                    value=''
+                >
+                    {defaultOption}
+                </option>
                 {optionsArray &&
                     optionsArray.map(option => (
                         <option
-                            key={option.value}
+                            key={option.name}
                             value={option.value}
                         >
                             {option.name}

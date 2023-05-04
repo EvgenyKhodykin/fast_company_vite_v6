@@ -23,7 +23,7 @@ function CheckBoxField({ name, value, onChange, children, error }) {
             />
             <label
                 className='form-check-label'
-                htmlFor='flexCheckDefault'
+                htmlFor={name}
             >
                 {children}
             </label>
@@ -36,7 +36,10 @@ CheckBoxField.propTypes = {
     name: PropTypes.string,
     value: PropTypes.bool,
     onChange: PropTypes.func,
-    children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
+    children: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.node),
+        PropTypes.node
+    ]),
     error: PropTypes.string
 }
 
