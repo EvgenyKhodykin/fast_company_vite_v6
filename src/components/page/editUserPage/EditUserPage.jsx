@@ -6,6 +6,7 @@ import SelectField from '../../common/form/SelectField'
 import RadioField from '../../common/form/RadioField'
 import MultiSelectField from '../../common/form/MultiSelectField'
 import Loading from '../../UI/Loading'
+import validator from '../../../utils/validator'
 
 export function EditUserPage() {
     const [user, setUser] = useState({
@@ -17,6 +18,7 @@ export function EditUserPage() {
     })
     const [professions, setProfessions] = useState([])
     const [qualities, setQualities] = useState([])
+    const [errors, setErrors] = useState({})
     const { userId } = useParams()
     const navigate = useNavigate()
 
@@ -71,8 +73,36 @@ export function EditUserPage() {
         }))
     }
 
+    const validatorConfig = {
+        email: {
+            isRequired: {
+                message: 'Email обязателен для заполнения'
+            },
+            isEmail: {
+                message: 'Email введён некорректно'
+            }
+        },
+        name: {
+            isRequired: {
+                message: 'Имя не должно быть пустым'
+            }
+        }
+    }
+
+    useEffect(() => {
+        validate()
+    }, [user])
+
+    const validate = () => {
+        const errors = validator(user, validatorConfig)
+        setErrors(errors)
+        return Object.keys(errors).length === 0
+    }
+
     const handleSubmit = event => {
         event.preventDefault()
+        const isValid = validate()
+        if (!isValid) return
         API.users
             .update(userId, {
                 ...user,
@@ -93,12 +123,14 @@ export function EditUserPage() {
                                 name='name'
                                 value={user.name}
                                 onChange={handleChange}
+                                error={errors.name}
                             />
                             <TextField
                                 label='Электронная почта'
                                 name='email'
                                 value={user.email}
                                 onChange={handleChange}
+                                error={errors.email}
                             />
                             <SelectField
                                 label='Выбери свою профессию'
