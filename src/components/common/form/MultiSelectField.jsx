@@ -3,14 +3,6 @@ import Select from 'react-select'
 import PropTypes from 'prop-types'
 
 function MultiSelectField({ onChange, options, name, label, defaultValue }) {
-    // let optionsArray = null
-    // if (!Array.isArray(options) && typeof options === 'object') {
-    //     optionsArray = Object.keys(options).map(optionName => ({
-    //         label: options[optionName].name,
-    //         value: options[optionName]._id
-    //     }))
-    // } else optionsArray = options
-
     const optionsArray =
         !Array.isArray(options) && typeof options === 'object'
             ? Object.values(options)

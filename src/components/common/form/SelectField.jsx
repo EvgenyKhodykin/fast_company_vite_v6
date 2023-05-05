@@ -18,14 +18,6 @@ function SelectField({
         return 'form-select' + (error ? ' is-invalid' : '')
     }
 
-    // let optionsArray = null
-    // if (!Array.isArray(options) && typeof options === 'object') {
-    //     optionsArray = Object.keys(options).map(optionName => ({
-    //         name: options[optionName].name,
-    //         value: options[optionName].name
-    //     }))
-    // } else optionsArray = options
-
     const optionsArray =
         !Array.isArray(options) && typeof options === 'object'
             ? Object.values(options)
@@ -55,10 +47,10 @@ function SelectField({
                 {optionsArray &&
                     optionsArray.map(option => (
                         <option
-                            key={option.name}
-                            value={option.value}
+                            key={option.label}
+                            value={option.label}
                         >
-                            {option.name}
+                            {option.label}
                         </option>
                     ))}
             </select>

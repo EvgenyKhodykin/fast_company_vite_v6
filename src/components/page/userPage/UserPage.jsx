@@ -20,10 +20,7 @@ export function UserPage({ id }) {
                 <Qualities {...user} />
                 <div>completedMeetings: {user.completedMeetings}</div>
                 <h3>Rate: {user.rate}</h3>
-                <Link
-                    to={`/users/${id}/edit`}
-                    replace
-                >
+                <Link to={`/users/${id}/edit`}>
                     <button className='btn btn-outline-primary'>
                         Изменить
                     </button>
@@ -35,5 +32,5 @@ export function UserPage({ id }) {
 }
 
 UserPage.propTypes = {
-    id: PropTypes.string
+    id: PropTypes.string.isRequired
 }

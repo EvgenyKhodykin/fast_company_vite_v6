@@ -17,7 +17,7 @@ function RegisterForm() {
         licence: false
     })
     const [errors, setErrors] = useState({})
-    const [professions, setProfession] = useState([])
+    const [professions, setProfessions] = useState([])
     const [qualities, setQualities] = useState([])
 
     const getProfessionById = id => {
@@ -50,7 +50,7 @@ function RegisterForm() {
                 label: data[professionName].name,
                 value: data[professionName]._id
             }))
-            setProfession(professionsList)
+            setProfessions(professionsList)
         })
         API.qualities.fetchAll().then(data => {
             const qualitiesList = Object.keys(data).map(optionName => ({
