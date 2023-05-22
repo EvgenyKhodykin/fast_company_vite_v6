@@ -159,7 +159,7 @@ export function EditUserPage() {
                             />
                             <div className='d-flex justify-content-between'>
                                 <button
-                                    type='submit'
+                                    type='button'
                                     className='btn btn-primary'
                                     onClick={() => navigate(-1)}
                                 >

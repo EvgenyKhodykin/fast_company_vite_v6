@@ -1,12 +1,11 @@
 import { React, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-// import { Link } from 'react-router-dom'
-// import Qualities from '../../UI/qualities'
 import API from '../../../api'
 import Loading from '../../UI/Loading'
 import UserCard from './UserCard'
 import QualitiesCard from './QualitiesCard'
 import MeetingsCard from './MeetingsCard'
+import CommentsList from './CommentsList'
 
 export function UserPage({ id }) {
     const [user, setUser] = useState()
@@ -24,7 +23,9 @@ export function UserPage({ id }) {
                         <QualitiesCard {...user} />
                         <MeetingsCard {...user} />
                     </div>
-                    <div className='col-md-8'></div>
+                    <div className='col-md-8'>
+                        <CommentsList userId={id} />
+                    </div>
                 </div>
             </div>
         )
