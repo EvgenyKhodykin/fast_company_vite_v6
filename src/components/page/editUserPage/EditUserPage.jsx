@@ -157,13 +157,22 @@ export function EditUserPage() {
                                 onChange={handleChange}
                                 defaultValue={transformedQualities}
                             />
-
-                            <button
-                                type='submit'
-                                className='btn btn-primary w-100 mx-auto'
-                            >
-                                Обновить
-                            </button>
+                            <div className='d-flex justify-content-between'>
+                                <button
+                                    type='submit'
+                                    className='btn btn-primary'
+                                    onClick={() => navigate(-1)}
+                                >
+                                    <i className='bi bi-caret-left'></i>
+                                    Назад
+                                </button>
+                                <button
+                                    type='submit'
+                                    className='btn btn-primary w-50 mx-6'
+                                >
+                                    Обновить
+                                </button>
+                            </div>
                         </form>
                     </div>
                 </div>
