@@ -2,7 +2,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-function Comment({ authorName, created_at, content }) {
+function Comment({ created_at, content, userId, allUsers }) {
+    const commentAuthor = allUsers.filter(user => user._id === userId)[0].name
+
     return (
         <div className='bg-light card-body  mb-3'>
             <div className='row'>
@@ -22,7 +24,7 @@ function Comment({ authorName, created_at, content }) {
                             <div className='mb-4'>
                                 <div className='d-flex justify-content-between align-items-center'>
                                     <p className='mb-1 '>
-                                        {authorName}
+                                        {commentAuthor}
                                         <span className='small'>
                                             {' - '}
                                             {created_at}
@@ -43,9 +45,10 @@ function Comment({ authorName, created_at, content }) {
 }
 
 Comment.propTypes = {
-    authorName: PropTypes.string,
     created_at: PropTypes.string,
-    content: PropTypes.string
+    content: PropTypes.string,
+    allUsers: PropTypes.array,
+    userId: PropTypes.string
 }
 
 export default Comment

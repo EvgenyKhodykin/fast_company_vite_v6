@@ -9,12 +9,18 @@ import CommentsList from './CommentsList'
 
 export function UserPage({ id }) {
     const [user, setUser] = useState()
+    const [users, setUsers] = useState([])
+    const [commentsForUser, setCommentsForUser] = useState([])
 
     useEffect(() => {
+        API.users.fetchAll().then(data => setUsers(data))
         API.users.getById(id).then(data => setUser(data))
+        API.comments
+            .fetchCommentsForUser(id)
+            .then(data => setCommentsForUser(data))
     }, [])
 
-    if (user) {
+    if (users.length > 0 && commentsForUser.length > 0) {
         return (
             <div className='container'>
                 <div className='row gutters-sm'>
@@ -24,7 +30,10 @@ export function UserPage({ id }) {
                         <MeetingsCard {...user} />
                     </div>
                     <div className='col-md-8'>
-                        <CommentsList userId={id} />
+                        <CommentsList
+                            comments={commentsForUser}
+                            allUsers={users}
+                        />
                     </div>
                 </div>
             </div>
