@@ -20,7 +20,7 @@ export function UserPage({ id }) {
             .then(data => setCommentsForUser(data))
     }, [])
 
-    if (users.length > 0 && commentsForUser.length > 0) {
+    if (users.length > 0) {
         return (
             <div className='container'>
                 <div className='row gutters-sm'>
@@ -30,10 +30,12 @@ export function UserPage({ id }) {
                         <MeetingsCard {...user} />
                     </div>
                     <div className='col-md-8'>
-                        <CommentsList
-                            comments={commentsForUser}
-                            allUsers={users}
-                        />
+                        {commentsForUser.length > 0 && (
+                            <CommentsList
+                                comments={commentsForUser}
+                                users={users}
+                            />
+                        )}
                     </div>
                 </div>
             </div>

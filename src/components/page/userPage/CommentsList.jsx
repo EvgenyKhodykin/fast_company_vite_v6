@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Comment from './Comment'
 
-function CommentsList({ comments, allUsers }) {
+function CommentsList({ comments, users }) {
     return (
         <>
             <div className='card mb-2'>
@@ -17,7 +17,7 @@ function CommentsList({ comments, allUsers }) {
                         <Comment
                             key={comment._id}
                             {...comment}
-                            allUsers={allUsers}
+                            users={users}
                         />
                     ))}
                 </div>
@@ -28,7 +28,7 @@ function CommentsList({ comments, allUsers }) {
 
 CommentsList.propTypes = {
     comments: PropTypes.array,
-    allUsers: PropTypes.array
+    users: PropTypes.array
 }
 
 export default CommentsList
