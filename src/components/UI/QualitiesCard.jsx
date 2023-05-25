@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Qualities from '../../UI/qualities'
+import Qualities from './qualities'
 
 function QualitiesCard({ qualities }) {
     return (

@@ -2,25 +2,21 @@ import { React, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import API from '../../../api'
 import Loading from '../../UI/Loading'
-import UserCard from './UserCard'
-import QualitiesCard from './QualitiesCard'
-import MeetingsCard from './MeetingsCard'
-import CommentsList from './CommentsList'
+import UserCard from '../../UI/UserCard'
+import QualitiesCard from '../../UI/QualitiesCard'
+import MeetingsCard from '../../UI/MeetingsCard'
+import CommentsList from '../../common/comments/CommentsList'
 
 export function UserPage({ id }) {
     const [user, setUser] = useState()
     const [users, setUsers] = useState([])
-    const [commentsForUser, setCommentsForUser] = useState([])
 
     useEffect(() => {
         API.users.fetchAll().then(data => setUsers(data))
         API.users.getById(id).then(data => setUser(data))
-        API.comments
-            .fetchCommentsForUser(id)
-            .then(data => setCommentsForUser(data))
     }, [])
 
-    if (users.length > 0) {
+    if (user && users.length > 0) {
         return (
             <div className='container'>
                 <div className='row gutters-sm'>
@@ -30,12 +26,10 @@ export function UserPage({ id }) {
                         <MeetingsCard {...user} />
                     </div>
                     <div className='col-md-8'>
-                        {commentsForUser.length > 0 && (
-                            <CommentsList
-                                comments={commentsForUser}
-                                users={users}
-                            />
-                        )}
+                        <CommentsList
+                            userId={id}
+                            users={users}
+                        />
                     </div>
                 </div>
             </div>
