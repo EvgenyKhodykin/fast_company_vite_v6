@@ -8,8 +8,8 @@ function AddCommentForm({ users, onSubmit }) {
         content: '',
         pageId: ''
     })
-    const [commentAuthor, setCommentAuthor] = useState('Выберите пользователя')
-    const [textAreaValue, setTextAreaValue] = useState('')
+    // const [commentAuthor, setCommentAuthor] = useState('Выберите пользователя')
+    // const [textAreaValue, setTextAreaValue] = useState('')
 
     const { userId } = useParams()
 
@@ -23,8 +23,6 @@ function AddCommentForm({ users, onSubmit }) {
 
     const handleSubmit = event => {
         event.preventDefault()
-        setCommentAuthor('Выберите пользователя')
-        setTextAreaValue('')
         onSubmit(comment)
     }
 
@@ -37,7 +35,7 @@ function AddCommentForm({ users, onSubmit }) {
                     name='userId'
                     onChange={handleChange}
                 >
-                    <option value=''>{commentAuthor}</option>
+                    <option value=''>Выберите пользователя</option>
                     {users.map(user => (
                         <option
                             key={user._id}
@@ -57,7 +55,7 @@ function AddCommentForm({ users, onSubmit }) {
                 <textarea
                     className='form-control'
                     style={{ height: '90px' }}
-                    value={textAreaValue}
+                    // value={textAreaValue}
                     name='content'
                     onChange={handleChange}
                 ></textarea>

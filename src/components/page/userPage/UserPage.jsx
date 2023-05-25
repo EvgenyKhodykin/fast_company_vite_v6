@@ -5,7 +5,7 @@ import Loading from '../../UI/Loading'
 import UserCard from '../../UI/UserCard'
 import QualitiesCard from '../../UI/QualitiesCard'
 import MeetingsCard from '../../UI/MeetingsCard'
-import CommentsList from '../../common/comments/CommentsList'
+import CommentsColumn from '../../common/comments/CommentsColumn'
 
 export function UserPage({ id }) {
     const [user, setUser] = useState()
@@ -26,7 +26,7 @@ export function UserPage({ id }) {
                         <MeetingsCard {...user} />
                     </div>
                     <div className='col-md-8'>
-                        <CommentsList
+                        <CommentsColumn
                             userId={id}
                             users={users}
                         />
