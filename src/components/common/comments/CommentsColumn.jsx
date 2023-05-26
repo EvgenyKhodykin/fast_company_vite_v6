@@ -15,14 +15,20 @@ function CommentsColumn({ userId, users }) {
             .then(data => setCommentsForUser(data))
     }, [])
 
-    const handleSubmit = comment => {
+    const handleSubmitForm = comment => {
         API.comments
             .add(comment)
-            .then(data => setCommentsForUser([...commentsForUser, data]))
+            .then(comment => setCommentsForUser([...commentsForUser, comment]))
     }
 
-    const handleRemove = id => {
-        API.comments.remove(id).then(data => setCommentsForUser(data))
+    const handleRemoveComment = id => {
+        API.comments
+            .remove(id)
+            .then(id =>
+                setCommentsForUser(
+                    commentsForUser.filter(comment => comment._id !== id)
+                )
+            )
     }
 
     return (
@@ -31,7 +37,7 @@ function CommentsColumn({ userId, users }) {
                 <div className='card-body '>
                     <AddCommentForm
                         users={users}
-                        onSubmit={handleSubmit}
+                        onSubmit={handleSubmitForm}
                     />
                 </div>
             </div>
@@ -44,7 +50,7 @@ function CommentsColumn({ userId, users }) {
                         <CommentsList
                             comments={sortedComments}
                             users={users}
-                            onRemove={handleRemove}
+                            onRemove={handleRemoveComment}
                         />
                     </div>
                 </div>

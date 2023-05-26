@@ -15,7 +15,7 @@ const monthNames = [
 
 const getCommentDate = data => {
     const difference = Date.now() - Number(data)
-    if (difference <= 60000) return '1 минуту назад'
+    if (difference > 0 && difference <= 60000) return '1 минуту назад'
     else if (difference > 60000 && difference <= 300000) {
         return '5 минут назад'
     } else if (difference > 300000 && difference <= 600000) {
