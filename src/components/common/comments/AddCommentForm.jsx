@@ -5,16 +5,16 @@ import validator from '../../../utils/validator'
 
 function AddCommentForm({ users, onSubmit }) {
     const { userId } = useParams()
+    const defaultSelectValue = '0'
+    const initialComment = { userId: '', content: '', pageId: userId }
 
-    const [comment, setComment] = useState({
-        userId: '',
-        content: '',
-        pageId: userId
-    })
+    const [comment, setComment] = useState(initialComment)
     const [textValue, setTextValue] = useState('')
+    const [selectValue, setSelectValue] = useState(defaultSelectValue)
     const [errors, setErrors] = useState({})
 
     const handleAuthorChange = ({ target }) => {
+        setSelectValue(target.value)
         setComment(prevState => ({
             ...prevState,
             [target.name]: target.value
@@ -34,8 +34,10 @@ function AddCommentForm({ users, onSubmit }) {
         const isValid = validate()
         if (!isValid) return
         onSubmit(comment)
+        setSelectValue(defaultSelectValue)
         setTextValue('')
         setErrors({})
+        setComment(initialComment)
     }
 
     const validatorConfig = {
@@ -72,9 +74,10 @@ function AddCommentForm({ users, onSubmit }) {
                         'form-select' + (errors.userId ? ' is-invalid' : '')
                     }
                     name='userId'
+                    value={selectValue}
                     onChange={handleAuthorChange}
                 >
-                    <option></option>
+                    <option value='0'></option>
                     {users.map(user => (
                         <option
                             key={user._id}
