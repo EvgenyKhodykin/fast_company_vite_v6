@@ -61,8 +61,8 @@ function AddCommentForm({ users, onSubmit }) {
 
     return (
         <>
+            <h2>New Comment</h2>
             <form onSubmit={handleSubmit}>
-                <h2>New Comment</h2>
                 <label
                     className='mt-4'
                     htmlFor='floatingTextarea2'
