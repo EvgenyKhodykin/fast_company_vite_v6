@@ -5,6 +5,7 @@ import MainPage from './components/UI/MainPage'
 import { ToastContainer } from 'react-toastify'
 import ProfessionsProvider from './hooks/useProfessions'
 import QualitiesProvider from './hooks/useQualities'
+import 'react-toastify/dist/ReactToastify.css'
 
 function App() {
     return (
