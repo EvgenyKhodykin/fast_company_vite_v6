@@ -8,9 +8,10 @@ import API from '../../../api'
 import SearchStatus from '../../UI/SearchStatus'
 import UserTable from '../../UI/UsersTable'
 import Loading from '../../UI/Loading'
+import { useUser } from '../../../hooks/useUsers'
 
 export function UsersListPage() {
-    const [users, setUsers] = useState()
+    const { users } = useUser()
     const [currentPage, setCurrentPage] = useState(1)
     const [professions, setProfessions] = useState()
     const [selectedProf, setSelectedProf] = useState()
@@ -20,16 +21,27 @@ export function UsersListPage() {
     const pageSize = 4
 
     useEffect(() => {
-        API.users.fetchAll().then(data => setUsers(data))
         API.professions.fetchAll().then(data => setProfessions(data))
     }, [])
 
     const handleDelete = userId => {
-        setUsers(users.filter(user => user._id !== userId))
+        // setUsers(users.filter(user => user._id !== userId))
+        console.log(userId)
     }
 
     const handleToggleBookmark = id => {
-        setUsers(
+        // setUsers(
+        //     users.map(user => {
+        //         if (user._id === id) {
+        //             return {
+        //                 ...user,
+        //                 bookmark: !user.bookmark
+        //             }
+        //         }
+        //         return user
+        //     })
+        // )
+        console.log(
             users.map(user => {
                 if (user._id === id) {
                     return {

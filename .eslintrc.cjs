@@ -15,7 +15,7 @@ module.exports = {
         quotes: ['error', 'single'],
         semi: ['error', 'never'],
         'no-console': 'warn',
-        'space-before-function-paren': ['error', 'never'],
+        'space-before-function-paren': ['off'],
         'multiline-ternary': ['off']
     }
 }
