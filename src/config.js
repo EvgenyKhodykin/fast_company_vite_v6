@@ -1,5 +1,7 @@
-const config = {
-    apiEndPoint: 'http://localhost:4000/api/v1/'
+const configFile = {
+    apiEndPoint:
+        'https://fast-company-firebase-f49fd-default-rtdb.europe-west1.firebasedatabase.app/',
+    isFireBase: true
 }
 
-export default config
+export default configFile
