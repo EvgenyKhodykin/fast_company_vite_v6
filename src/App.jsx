@@ -6,33 +6,36 @@ import { ToastContainer } from 'react-toastify'
 import ProfessionsProvider from './hooks/useProfessions'
 import QualitiesProvider from './hooks/useQualities'
 import 'react-toastify/dist/ReactToastify.css'
+import AuthProvider from './hooks/useAuth'
 
 function App() {
     return (
         <>
-            <ProfessionsProvider>
-                <QualitiesProvider>
-                    <Routes>
-                        <Route
-                            path='/'
-                            element={<MainLayout />}
-                        >
+            <AuthProvider>
+                <ProfessionsProvider>
+                    <QualitiesProvider>
+                        <Routes>
                             <Route
-                                index
-                                element={<MainPage />}
-                            />
-                            <Route
-                                path='login/:type?'
-                                element={<LoginLayout />}
-                            />
-                            <Route
-                                path='users/:userId?/:edit?'
-                                element={<UsersLayout />}
-                            />
-                        </Route>
-                    </Routes>
-                </QualitiesProvider>
-            </ProfessionsProvider>
+                                path='/'
+                                element={<MainLayout />}
+                            >
+                                <Route
+                                    index
+                                    element={<MainPage />}
+                                />
+                                <Route
+                                    path='login/:type?'
+                                    element={<LoginLayout />}
+                                />
+                                <Route
+                                    path='users/:userId?/:edit?'
+                                    element={<UsersLayout />}
+                                />
+                            </Route>
+                        </Routes>
+                    </QualitiesProvider>
+                </ProfessionsProvider>
+            </AuthProvider>
             <ToastContainer />
         </>
     )

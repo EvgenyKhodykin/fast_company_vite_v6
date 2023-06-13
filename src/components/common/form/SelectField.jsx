@@ -47,7 +47,7 @@ function SelectField({
                 {optionsArray &&
                     optionsArray.map(option => (
                         <option
-                            key={option.label}
+                            key={option.value}
                             value={option.label}
                         >
                             {option.label}
