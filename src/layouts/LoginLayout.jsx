@@ -23,7 +23,7 @@ export function LoginLayout() {
                         <>
                             <h3 className='mb-4'>Регистрация</h3>
                             <RegisterForm />
-                            <p>
+                            <p className='mt-4'>
                                 Already have an account?{' '}
                                 <a
                                     role='button'
@@ -37,7 +37,7 @@ export function LoginLayout() {
                         <>
                             <h3 className='mb-4'>Вход</h3>
                             <LoginForm />
-                            <p>
+                            <p className='mt-4'>
                                 Do not have an account?{' '}
                                 <a
                                     role='button'

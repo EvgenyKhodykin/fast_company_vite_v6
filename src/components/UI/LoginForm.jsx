@@ -2,10 +2,14 @@ import { React, useEffect, useState } from 'react'
 import TextField from '../common/form/TextField'
 import validator from '../../utils/validator'
 import CheckBoxField from '../common/form/CheckBoxField'
+import { useAuth } from '../../hooks/useAuth'
+import { useNavigate } from 'react-router-dom'
 
 function LoginForm() {
     const [data, setData] = useState({ email: '', password: '', stayOn: false })
     const [errors, setErrors] = useState({})
+    const { signIn } = useAuth()
+    const navigate = useNavigate()
 
     const handleChange = target => {
         setData(prevState => ({
@@ -17,15 +21,15 @@ function LoginForm() {
     const validatorConfig = {
         email: {
             isRequired: {
-                message: 'Поле Email обязательно для заполнения'
+                message: 'Email field is required'
             },
             isEmail: {
-                message: 'Email введён некорректно'
+                message: 'Incorrect Email'
             }
         },
         password: {
             isRequired: {
-                message: 'Поле Пароль обязательно для заполнения'
+                message: 'Password field is required'
             },
             isCapitalSymbol: {
                 message: 'Пароль должен содержать хотя бы одну заглавную букву'
@@ -52,11 +56,16 @@ function LoginForm() {
 
     const isValid = Object.keys(errors).length === 0
 
-    const handleSubmit = event => {
+    const handleSubmit = async event => {
         event.preventDefault()
         const isValid = validate()
         if (!isValid) return
-        return undefined
+        try {
+            await signIn(data)
+            navigate('/')
+        } catch (error) {
+            setErrors(error)
+        }
     }
 
     return (
@@ -87,7 +96,7 @@ function LoginForm() {
                 disabled={!isValid}
                 className='btn btn-primary w-100 mx-auto'
             >
-                Submit
+                Log In
             </button>
         </form>
     )

@@ -45,15 +45,15 @@ function RegisterForm() {
     const validatorConfig = {
         email: {
             isRequired: {
-                message: 'Поле Email обязательно для заполнения'
+                message: 'Email field is required'
             },
             isEmail: {
-                message: 'Email введён некорректно'
+                message: 'Incorrect Email'
             }
         },
         password: {
             isRequired: {
-                message: 'Поле Пароль обязательно для заполнения'
+                message: 'Password field is required'
             },
             isCapitalSymbol: {
                 message: 'Пароль должен содержать хотя бы одну заглавную букву'
@@ -68,7 +68,7 @@ function RegisterForm() {
         },
         profession: {
             isRequired: {
-                message: 'Поле Profession обязательно для заполнения'
+                message: 'Profession field is required'
             }
         },
         licence: {
