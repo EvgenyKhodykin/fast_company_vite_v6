@@ -4,6 +4,7 @@ import validator from '../../utils/validator'
 import CheckBoxField from '../common/form/CheckBoxField'
 import { useAuth } from '../../hooks/useAuth'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 function LoginForm() {
     const [data, setData] = useState({ email: '', password: '', stayOn: false })
@@ -63,6 +64,7 @@ function LoginForm() {
         try {
             await signIn(data)
             navigate('/')
+            toast(`Welcome, ${data.email}!`)
         } catch (error) {
             setErrors(error)
         }
