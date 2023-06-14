@@ -17,8 +17,9 @@ function AuthProvider({ children }) {
     const [error, setError] = useState(null)
 
     async function signUp({ email, password, ...rest }) {
-        const key = 'AIzaSyD6i06gcYejGeqVCFnMqRDzfqTrZ5out0M'
-        const url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${key}`
+        const url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${
+            import.meta.env.VITE_REACT_APP_FIREBASE_KEY
+        }`
 
         try {
             const { data } = await httpAuth.post(url, {
