@@ -10,7 +10,7 @@ function MainPage() {
 
     return (
         <div className='container mt-5'>
-            <h3>Инициализация данных в Firebase:</h3>
+            <h3>Firebase data initialisation:</h3>
             <ul>
                 <li>Status: {status}</li>
                 <li>Progress: {progress}</li>
@@ -20,7 +20,7 @@ function MainPage() {
                 className='btn btn-primary mt-4'
                 onClick={handleClick}
             >
-                Инициализировать
+                Initialize
             </button>
         </div>
     )

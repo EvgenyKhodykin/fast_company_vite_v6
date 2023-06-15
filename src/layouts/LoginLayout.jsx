@@ -21,7 +21,7 @@ export function LoginLayout() {
                 <div className='col-md-6 offset-md-3 shadow p-4'>
                     {formType === 'register' ? (
                         <>
-                            <h3 className='mb-4'>Регистрация</h3>
+                            <h3 className='mb-4'>Registration</h3>
                             <RegisterForm />
                             <p className='mt-4'>
                                 Already have an account?{' '}
@@ -35,7 +35,7 @@ export function LoginLayout() {
                         </>
                     ) : (
                         <>
-                            <h3 className='mb-4'>Вход</h3>
+                            <h3 className='mb-4'>Login</h3>
                             <LoginForm />
                             <p className='mt-4'>
                                 Do not have an account?{' '}

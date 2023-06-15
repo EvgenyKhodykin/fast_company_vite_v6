@@ -56,13 +56,13 @@ function RegisterForm() {
                 message: 'Password field is required'
             },
             isCapitalSymbol: {
-                message: 'Пароль должен содержать хотя бы одну заглавную букву'
+                message: 'Password must be received for one capital letter'
             },
             isContainDigit: {
-                message: 'Пароль должен содержать хотя бы одну цифру'
+                message: 'Password must be received for one digit'
             },
             min: {
-                message: 'Пароль должен состоять минимум из 8 символов',
+                message: 'Password must be at least 8 characters long',
                 value: 8
             }
         },
@@ -73,7 +73,7 @@ function RegisterForm() {
         },
         licence: {
             isRequired: {
-                message: 'Подтвердите лицензионное соглашение '
+                message: 'Confirm the license agreement '
             }
         }
     }
@@ -153,14 +153,14 @@ function RegisterForm() {
                 name='licence'
                 error={errors.licence}
             >
-                Подтвердить <a>лицензионное соглашение</a>
+                Confirm <a>license agreement</a>
             </CheckBoxField>
             <button
                 type='submit'
                 disabled={!isValid}
                 className='btn btn-primary w-100 mx-auto'
             >
-                Submit
+                Sign Up
             </button>
         </form>
     )

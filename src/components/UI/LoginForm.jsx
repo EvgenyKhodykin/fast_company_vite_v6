@@ -33,13 +33,13 @@ function LoginForm() {
                 message: 'Password field is required'
             },
             isCapitalSymbol: {
-                message: 'Пароль должен содержать хотя бы одну заглавную букву'
+                message: 'Password must be received for one capital letter'
             },
             isContainDigit: {
-                message: 'Пароль должен содержать хотя бы одну цифру'
+                message: 'Password must be received for one digit'
             },
             min: {
-                message: 'Пароль должен состоять минимум из 8 символов',
+                message: 'Password must be at least 8 characters long',
                 value: 8
             }
         }
@@ -92,7 +92,7 @@ function LoginForm() {
                 onChange={handleChange}
                 name='stayOn'
             >
-                Оставаться в системе
+                Stay logged in
             </CheckBoxField>
             <button
                 disabled={!isValid}
