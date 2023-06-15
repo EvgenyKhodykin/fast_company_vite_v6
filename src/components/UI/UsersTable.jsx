@@ -16,25 +16,25 @@ function UserTable({
     const columns = {
         name: {
             path: 'name',
-            name: 'Имя',
+            name: 'Name',
             component: user => <Link to={user._id}>{user.name}</Link>
         },
         qualities: {
-            name: 'Качества',
+            name: 'Qualities',
             component: user => <Qualities qualities={user.qualities} />
         },
         profession: {
-            name: 'Профессия',
+            name: 'Profession',
             component: user => <Profession id={user.profession} />
         },
         completedMeetings: {
             path: 'completedMeetings',
-            name: 'Встретился, раз'
+            name: 'Meetings'
         },
-        rate: { path: 'rate', name: 'Оценка' },
+        rate: { path: 'rate', name: 'Rate' },
         bookmark: {
             path: 'bookmark',
-            name: 'Избранное',
+            name: 'Bookmark',
             component: user => (
                 <button onClick={() => onToggleBookMark(user._id)}>
                     <BookMark status={user.bookmark} />

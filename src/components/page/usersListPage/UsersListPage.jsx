@@ -117,7 +117,7 @@ export function UsersListPage() {
                             className='btn btn-secondary m-2'
                             onClick={clearFilter}
                         >
-                            Очистить
+                            Clear
                         </button>
                     </div>
 
@@ -127,7 +127,7 @@ export function UsersListPage() {
                             <i className='bi bi-search'> </i>
                             <input
                                 type='text'
-                                placeholder='поиск...'
+                                placeholder='search...'
                                 className='w-50 border-0'
                                 style={{ outline: 'none' }}
                                 onChange={handleSearch}
