@@ -85,7 +85,7 @@ export function UsersListPage() {
             )
         } else if (selectedProf) {
             filteredUsers = users.filter(
-                user => user.profession._id === selectedProf._id
+                user => user.profession === selectedProf._id
             )
         } else filteredUsers = users
 
@@ -104,9 +104,9 @@ export function UsersListPage() {
             setSearchValue('')
         }
 
-        return (
-            <div className='d-flex'>
-                {professions && (
+        if (professions) {
+            return (
+                <div className='d-flex'>
                     <div className='d-flex flex-column flex-shrink-0 p-3'>
                         <GroupList
                             selectedItem={selectedProf}
@@ -120,41 +120,41 @@ export function UsersListPage() {
                             Очистить
                         </button>
                     </div>
-                )}
 
-                <div className='d-flex flex-column'>
-                    <SearchStatus length={count} />
-                    <div className='container'>
-                        <i className='bi bi-search'> </i>
-                        <input
-                            type='text'
-                            placeholder='поиск...'
-                            className='w-50 border-0'
-                            style={{ outline: 'none' }}
-                            onChange={handleSearch}
-                            value={searchValue}
-                        />
-                    </div>
-                    {count > 0 && (
-                        <UserTable
-                            users={userCrop}
-                            onSort={handleSort}
-                            selectedSort={sortBy}
-                            onDelete={handleDelete}
-                            onToggleBookMark={handleToggleBookmark}
-                        />
-                    )}
-                    <div className='d-flex justify-content-center'>
-                        <Pagination
-                            currentPage={currentPage}
-                            itemsCount={count}
-                            pageSize={pageSize}
-                            onPageChange={handlePageChange}
-                        />
+                    <div className='d-flex flex-column'>
+                        <SearchStatus length={count} />
+                        <div className='container'>
+                            <i className='bi bi-search'> </i>
+                            <input
+                                type='text'
+                                placeholder='поиск...'
+                                className='w-50 border-0'
+                                style={{ outline: 'none' }}
+                                onChange={handleSearch}
+                                value={searchValue}
+                            />
+                        </div>
+                        {count > 0 && (
+                            <UserTable
+                                users={userCrop}
+                                onSort={handleSort}
+                                selectedSort={sortBy}
+                                onDelete={handleDelete}
+                                onToggleBookMark={handleToggleBookmark}
+                            />
+                        )}
+                        <div className='d-flex justify-content-center'>
+                            <Pagination
+                                currentPage={currentPage}
+                                itemsCount={count}
+                                pageSize={pageSize}
+                                onPageChange={handlePageChange}
+                            />
+                        </div>
                     </div>
                 </div>
-            </div>
-        )
+            )
+        }
     }
     return <Loading />
 }
