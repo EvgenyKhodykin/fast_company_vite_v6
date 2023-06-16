@@ -18,7 +18,7 @@ function AuthProvider({ children }) {
 
     async function signIn({ email, password }) {
         const url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${
-            import.meta.env.VITE_REACT_APP_FIREBASE_KEY
+            import.meta.env.VITE_REACT_APP_FIREBASE_API_KEY
         }`
         try {
             const { data } = await httpAuth.post(url, {
@@ -47,7 +47,7 @@ function AuthProvider({ children }) {
 
     async function signUp({ email, password, ...rest }) {
         const url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${
-            import.meta.env.VITE_REACT_APP_FIREBASE_KEY
+            import.meta.env.VITE_REACT_APP_FIREBASE_API_KEY
         }`
 
         try {
@@ -64,7 +64,7 @@ function AuthProvider({ children }) {
             if (code === 400) {
                 if (message === 'EMAIL_EXISTS') {
                     const errorObject = {
-                        email: 'Пользователь с таким Email уже существует'
+                        email: 'This Email already exists'
                     }
                     throw errorObject
                 }
