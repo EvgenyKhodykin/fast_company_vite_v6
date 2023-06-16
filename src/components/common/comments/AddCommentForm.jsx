@@ -43,12 +43,12 @@ function AddCommentForm({ users, onSubmit }) {
     const validatorConfig = {
         userId: {
             isRequired: {
-                message: 'Выберите автора сообщения'
+                message: 'Message author is required'
             }
         },
         content: {
             isRequired: {
-                message: 'Сообщение не должно быть пустым'
+                message: 'Message field is required'
             }
         }
     }
@@ -67,7 +67,7 @@ function AddCommentForm({ users, onSubmit }) {
                     className='mt-4'
                     htmlFor='floatingTextarea2'
                 >
-                    Выберите автора сообщения
+                    Select a message author
                 </label>
                 <select
                     className={
@@ -94,7 +94,7 @@ function AddCommentForm({ users, onSubmit }) {
                     className='mt-4'
                     htmlFor='floatingTextarea2'
                 >
-                    Сообщение
+                    Message
                 </label>
                 <div className='input-group'>
                     <textarea
@@ -115,7 +115,7 @@ function AddCommentForm({ users, onSubmit }) {
                     className='btn btn-primary mt-4 float-end'
                     type='submit'
                 >
-                    Опубликовать
+                    Create
                 </button>
             </form>
         </>
