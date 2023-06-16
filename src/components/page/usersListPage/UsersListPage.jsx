@@ -4,55 +4,40 @@ import Pagination from '../../common/Pagination'
 import paginate from '../../../utils/paginate'
 import PropTypes from 'prop-types'
 import GroupList from '../../common/GroupList'
-import API from '../../../api'
 import SearchStatus from '../../UI/SearchStatus'
 import UserTable from '../../UI/UsersTable'
 import Loading from '../../UI/Loading'
 import { useUser } from '../../../hooks/useUsers'
+import { useProfessions } from '../../../hooks/useProfessions'
 
 export function UsersListPage() {
     const { users } = useUser()
+    const { professions } = useProfessions()
     const [currentPage, setCurrentPage] = useState(1)
-    const [professions, setProfessions] = useState()
     const [selectedProf, setSelectedProf] = useState()
     const [sortBy, setSortBy] = useState({ iter: 'name', order: 'asc' })
     const [searchValue, setSearchValue] = useState('')
 
     const pageSize = 4
 
-    useEffect(() => {
-        API.professions.fetchAll().then(data => setProfessions(data))
-    }, [])
+    // const handleDelete = userId => {
+    //      setUsers(users.filter(user => user._id !== userId))
 
-    const handleDelete = userId => {
-        // setUsers(users.filter(user => user._id !== userId))
-        console.log(userId)
-    }
+    // }
 
-    const handleToggleBookmark = id => {
-        // setUsers(
-        //     users.map(user => {
-        //         if (user._id === id) {
-        //             return {
-        //                 ...user,
-        //                 bookmark: !user.bookmark
-        //             }
-        //         }
-        //         return user
-        //     })
-        // )
-        console.log(
-            users.map(user => {
-                if (user._id === id) {
-                    return {
-                        ...user,
-                        bookmark: !user.bookmark
-                    }
-                }
-                return user
-            })
-        )
-    }
+    // const handleToggleBookmark = id => {
+    //     // setUsers(
+    //     //     users.map(user => {
+    //     //         if (user._id === id) {
+    //     //             return {
+    //     //                 ...user,
+    //     //                 bookmark: !user.bookmark
+    //     //             }
+    //     //         }
+    //     //         return user
+    //     //     })
+    //     // )
+    // }
 
     useEffect(() => {
         setCurrentPage(1)
@@ -104,7 +89,7 @@ export function UsersListPage() {
             setSearchValue('')
         }
 
-        if (professions) {
+        if (professions && users) {
             return (
                 <div className='d-flex'>
                     <div className='d-flex flex-column flex-shrink-0 p-3'>
@@ -139,8 +124,8 @@ export function UsersListPage() {
                                 users={userCrop}
                                 onSort={handleSort}
                                 selectedSort={sortBy}
-                                onDelete={handleDelete}
-                                onToggleBookMark={handleToggleBookmark}
+                                // onDelete={handleDelete}
+                                // onToggleBookMark={handleToggleBookmark}
                             />
                         )}
                         <div className='d-flex justify-content-center'>
