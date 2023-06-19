@@ -23,24 +23,11 @@ function LoginForm() {
         email: {
             isRequired: {
                 message: 'Email field is required'
-            },
-            isEmail: {
-                message: 'Incorrect Email'
             }
         },
         password: {
             isRequired: {
                 message: 'Password field is required'
-            },
-            isCapitalSymbol: {
-                message: 'Password must be received for one capital letter'
-            },
-            isContainDigit: {
-                message: 'Password must be received for one digit'
-            },
-            min: {
-                message: 'Password must be at least 8 characters long',
-                value: 8
             }
         }
     }
