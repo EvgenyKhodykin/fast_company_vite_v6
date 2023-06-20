@@ -9,7 +9,6 @@ import { useQualities } from '../../hooks/useQualities'
 import { useProfessions } from '../../hooks/useProfessions'
 import { useAuth } from '../../hooks/useAuth'
 import { useNavigate } from 'react-router-dom'
-import { toast } from 'react-toastify'
 
 function RegisterForm() {
     const [data, setData] = useState({
@@ -109,7 +108,6 @@ function RegisterForm() {
         }
         try {
             await signUp(newData)
-            toast('Registration succesfully comleted!')
             navigate('/')
         } catch (error) {
             setErrors(error)

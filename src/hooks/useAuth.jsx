@@ -18,7 +18,7 @@ export const useAuth = () => {
 }
 
 function AuthProvider({ children }) {
-    const [currentUser, setCurrentUser] = useState({})
+    const [currentUser, setCurrentUser] = useState()
     const [error, setError] = useState(null)
 
     async function signIn({ email, password }) {
@@ -57,7 +57,7 @@ function AuthProvider({ children }) {
 
     async function signUp({ email, password, ...rest }) {
         try {
-            const { data } = await httpAuth.post('accounts:  signUp', {
+            const { data } = await httpAuth.post('accounts:signUp', {
                 email,
                 password,
                 returnSecureToken: true
@@ -95,7 +95,7 @@ function AuthProvider({ children }) {
 
     async function getUserData() {
         try {
-            const { content } = userService.getCurrentUser()
+            const { content } = await userService.getCurrentUser()
             setCurrentUser(content)
         } catch (error) {
             errorCatcher(error)

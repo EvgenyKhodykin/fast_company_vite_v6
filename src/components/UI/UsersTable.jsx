@@ -65,11 +65,11 @@ function UserTable({
 }
 
 UserTable.propTypes = {
-    users: PropTypes.array.isRequired,
-    onSort: PropTypes.func.isRequired,
-    selectedSort: PropTypes.object.isRequired,
-    onToggleBookMark: PropTypes.func.isRequired,
-    onDelete: PropTypes.func.isRequired
+    users: PropTypes.array,
+    onSort: PropTypes.func,
+    selectedSort: PropTypes.object,
+    onToggleBookMark: PropTypes.func,
+    onDelete: PropTypes.func
 }
 
 export default UserTable

@@ -1,20 +1,47 @@
 import { React } from 'react'
 import { NavLink } from 'react-router-dom'
+import { useAuth } from '../../hooks/useAuth'
+import NavProfile from './NavProfile'
 
 function NavBar() {
+    const { currentUser } = useAuth()
+
     return (
-        <nav className='nav nav-pills m-2'>
-            <NavLink className='nav-link' to='/'>
-                Main
-            </NavLink>
-
-            <NavLink className='nav-link' to='/login'>
-                Login
-            </NavLink>
-
-            <NavLink className='nav-link' to='/users'>
-                Users
-            </NavLink>
+        <nav className='navbar mx-2 bg-light'>
+            <div className='container-fluid'>
+                <ul className='nav nav-pills'>
+                    <li className='nav-item'>
+                        <NavLink
+                            className='nav-link'
+                            to='/'
+                        >
+                            Main
+                        </NavLink>
+                    </li>
+                    {currentUser && (
+                        <li className='nav-item'>
+                            <NavLink
+                                className='nav-link'
+                                to='/users'
+                            >
+                                Users
+                            </NavLink>
+                        </li>
+                    )}
+                </ul>
+                <div className='d-flex'>
+                    {currentUser ? (
+                        <NavProfile />
+                    ) : (
+                        <NavLink
+                            className='nav-link'
+                            to='/login'
+                        >
+                            Login
+                        </NavLink>
+                    )}
+                </div>
+            </div>
         </nav>
     )
 }

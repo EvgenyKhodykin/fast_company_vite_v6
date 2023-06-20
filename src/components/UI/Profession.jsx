@@ -7,7 +7,7 @@ function Profession({ id }) {
     const profession = getProfession(id)
 
     if (!isLoading) {
-        return <p>{profession.name}</p>
+        return <p>{profession}</p>
     }
     return 'Loading...'
 }
