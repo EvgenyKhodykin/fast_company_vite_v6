@@ -7,6 +7,7 @@ import ProfessionsProvider from './hooks/useProfessions'
 import QualitiesProvider from './hooks/useQualities'
 import 'react-toastify/dist/ReactToastify.css'
 import AuthProvider from './hooks/useAuth'
+import ProtectedRoutes from './components/common/ProtectedRoutes'
 
 function App() {
     return (
@@ -27,10 +28,12 @@ function App() {
                                     path='login/:type?'
                                     element={<LoginLayout />}
                                 />
-                                <Route
-                                    path='users/:userId?/:edit?'
-                                    element={<UsersLayout />}
-                                />
+                                <Route element={<ProtectedRoutes />}>
+                                    <Route
+                                        path='users/:userId?/:edit?'
+                                        element={<UsersLayout />}
+                                    />
+                                </Route>
                             </Route>
                         </Routes>
                     </QualitiesProvider>
