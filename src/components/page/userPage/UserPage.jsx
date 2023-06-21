@@ -1,22 +1,17 @@
-import { React, useEffect, useState } from 'react'
+import { React } from 'react'
 import PropTypes from 'prop-types'
-import API from '../../../api'
 import Loading from '../../UI/Loading'
 import UserCard from '../../UI/UserCard'
 import QualitiesCard from '../../UI/QualitiesCard'
 import MeetingsCard from '../../UI/MeetingsCard'
-import CommentsColumn from '../../common/comments/CommentsColumn'
+// import CommentsColumn from '../../common/comments/CommentsColumn'
+import { useUser } from '../../../hooks/useUsers'
 
 export function UserPage({ id }) {
-    const [user, setUser] = useState()
-    const [users, setUsers] = useState([])
+    const { getUserById } = useUser()
+    const user = getUserById(id)
 
-    useEffect(() => {
-        API.users.fetchAll().then(data => setUsers(data))
-        API.users.getById(id).then(data => setUser(data))
-    }, [])
-
-    if (user && users.length > 0) {
+    if (user) {
         return (
             <div className='container'>
                 <div className='row gutters-sm'>
@@ -26,10 +21,7 @@ export function UserPage({ id }) {
                         <MeetingsCard {...user} />
                     </div>
                     <div className='col-md-8'>
-                        <CommentsColumn
-                            userId={id}
-                            users={users}
-                        />
+                        {/* <CommentsColumn userId={id} /> */}
                     </div>
                 </div>
             </div>
