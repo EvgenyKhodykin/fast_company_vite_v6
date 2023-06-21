@@ -12,18 +12,13 @@ import { useProfessions } from '../../../hooks/useProfessions'
 
 export function UsersListPage() {
     const { users } = useUser()
-    const { professions } = useProfessions()
+    const { isLoading: professinsLoading, professions } = useProfessions()
     const [currentPage, setCurrentPage] = useState(1)
     const [selectedProf, setSelectedProf] = useState()
     const [sortBy, setSortBy] = useState({ iter: 'name', order: 'asc' })
     const [searchValue, setSearchValue] = useState('')
 
     const pageSize = 4
-
-    // const handleDelete = userId => {
-    //      setUsers(users.filter(user => user._id !== userId))
-
-    // }
 
     // const handleToggleBookmark = id => {
     //     // setUsers(
@@ -89,7 +84,7 @@ export function UsersListPage() {
             setSearchValue('')
         }
 
-        if (professions && users) {
+        if (!professinsLoading && professions && users) {
             return (
                 <div className='d-flex'>
                     <div className='d-flex flex-column flex-shrink-0 p-3'>
@@ -124,7 +119,6 @@ export function UsersListPage() {
                                 users={userCrop}
                                 onSort={handleSort}
                                 selectedSort={sortBy}
-                                // onDelete={handleDelete}
                                 // onToggleBookMark={handleToggleBookmark}
                             />
                         )}
