@@ -1,6 +1,6 @@
 import { React } from 'react'
 import { Routes, Route } from 'react-router-dom'
-import { MainLayout, LoginLayout, UsersLayout } from './layouts'
+import { MainLayout, LoginLayout, UsersLayout, LogOut } from './layouts'
 import MainPage from './components/UI/MainPage'
 import { ToastContainer } from 'react-toastify'
 import ProfessionsProvider from './hooks/useProfessions'
@@ -34,6 +34,10 @@ function App() {
                                         element={<UsersLayout />}
                                     />
                                 </Route>
+                                <Route
+                                    path='logout'
+                                    element={<LogOut />}
+                                />
                             </Route>
                         </Routes>
                     </QualitiesProvider>

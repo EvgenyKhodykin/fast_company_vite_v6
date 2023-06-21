@@ -11,6 +11,7 @@ function LoginForm() {
     const { signIn } = useAuth()
     const navigate = useNavigate()
     const location = useLocation()
+    const fromPage = location.state?.from.pathname || '/'
 
     const handleChange = target => {
         setData(prevState => ({
@@ -50,7 +51,7 @@ function LoginForm() {
         if (!isValid) return
         try {
             await signIn(data)
-            navigate(location.state.from.pathname)
+            navigate(fromPage)
         } catch (error) {
             setErrors(error)
         }
