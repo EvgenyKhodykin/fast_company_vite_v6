@@ -32,7 +32,7 @@ function NavProfile() {
                     Profile
                 </Link>
                 <Link
-                    to='logout'
+                    to='/logout'
                     className='dropdown-item'
                 >
                     Log Out
