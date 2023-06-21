@@ -4,9 +4,11 @@ import PropTypes from 'prop-types'
 import AddCommentForm from './AddCommentForm'
 import CommentsList from './CommentsList'
 import API from '../../../api'
+import { useComments } from '../../../hooks/useComments'
 
 function CommentsColumn({ userId, users }) {
     const [commentsForUser, setCommentsForUser] = useState([])
+    const { createComment } = useComments()
     const sortedComments = orderBy(commentsForUser, ['created_at'], ['desc'])
 
     useEffect(() => {
@@ -15,10 +17,11 @@ function CommentsColumn({ userId, users }) {
             .then(data => setCommentsForUser(data))
     }, [])
 
-    const handleSubmitForm = comment => {
-        API.comments
-            .add(comment)
-            .then(comment => setCommentsForUser([...commentsForUser, comment]))
+    const handleSubmitForm = data => {
+        createComment(data)
+        // API.comments
+        //     .add(comment)
+        //     .then(comment => setCommentsForUser([...commentsForUser, comment]))
     }
 
     const handleRemoveComment = id => {
@@ -49,7 +52,6 @@ function CommentsColumn({ userId, users }) {
                         <hr />
                         <CommentsList
                             comments={sortedComments}
-                            users={users}
                             onRemove={handleRemoveComment}
                         />
                     </div>
