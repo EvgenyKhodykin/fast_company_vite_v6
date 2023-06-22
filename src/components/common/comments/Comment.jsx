@@ -3,9 +3,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import getCommentDate from '../../../utils/getCommentDate'
 import { useUser } from '../../../hooks/useUsers'
+import { useAuth } from '../../../hooks/useAuth'
 
 function Comment({ _id, created_at, content, userId, onRemove }) {
     const { getUserById } = useUser()
+    const { currentUser } = useAuth()
     const commentAuthor = getUserById(userId)
 
     return (
@@ -29,12 +31,14 @@ function Comment({ _id, created_at, content, userId, onRemove }) {
                                             {getCommentDate(created_at)}
                                         </span>
                                     </p>
-                                    <button
-                                        onClick={() => onRemove(_id)}
-                                        className='btn btn-sm text-primary d-flex align-items-center'
-                                    >
-                                        <i className='bi bi-x-lg'></i>
-                                    </button>
+                                    {currentUser._id === userId && (
+                                        <button
+                                            onClick={() => onRemove(_id)}
+                                            className='btn btn-sm text-primary d-flex align-items-center'
+                                        >
+                                            <i className='bi bi-x-lg'></i>
+                                        </button>
+                                    )}
                                 </div>
                                 <p className='small mb-0'>{content}</p>
                             </div>
