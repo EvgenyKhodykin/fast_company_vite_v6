@@ -2,14 +2,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Comment from './Comment'
 
-function CommentsList({ comments, users, onRemove }) {
+function CommentsList({ comments, onRemove }) {
     return (
         <>
             {comments.map(comment => (
                 <Comment
                     key={comment._id}
                     {...comment}
-                    users={users}
                     onRemove={onRemove}
                 />
             ))}
@@ -19,7 +18,6 @@ function CommentsList({ comments, users, onRemove }) {
 
 CommentsList.propTypes = {
     comments: PropTypes.array,
-    users: PropTypes.array,
     onRemove: PropTypes.func
 }
 

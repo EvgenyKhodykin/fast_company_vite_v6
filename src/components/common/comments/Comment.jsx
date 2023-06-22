@@ -2,9 +2,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import getCommentDate from '../../../utils/getCommentDate'
+import { useUser } from '../../../hooks/useUsers'
 
-function Comment({ _id, created_at, content, userId, users, onRemove }) {
-    const commentAuthor = users.filter(user => user._id === userId)[0].name
+function Comment({ _id, created_at, content, userId, onRemove }) {
+    const { getUserById } = useUser()
+    const commentAuthor = getUserById(userId)
 
     return (
         <div className='bg-light card-body  mb-3'>
@@ -12,11 +14,7 @@ function Comment({ _id, created_at, content, userId, users, onRemove }) {
                 <div className='col'>
                     <div className='d-flex flex-start '>
                         <img
-                            src={`https://avatars.dicebear.com/api/avataaars/${(
-                                Math.random() + 1
-                            )
-                                .toString(36)
-                                .substring(7)}.svg`}
+                            src={commentAuthor.image}
                             className='rounded-circle shadow-1-strong me-3'
                             alt='avatar'
                             width='60'
@@ -25,7 +23,7 @@ function Comment({ _id, created_at, content, userId, users, onRemove }) {
                             <div className='mb-4'>
                                 <div className='d-flex justify-content-between align-items-center'>
                                     <p className='mb-1 '>
-                                        {commentAuthor}
+                                        {commentAuthor.name}
                                         <span className='small'>
                                             {' - '}
                                             {getCommentDate(created_at)}
@@ -49,9 +47,8 @@ function Comment({ _id, created_at, content, userId, users, onRemove }) {
 }
 
 Comment.propTypes = {
-    created_at: PropTypes.string,
+    created_at: PropTypes.number,
     content: PropTypes.string,
-    users: PropTypes.array,
     userId: PropTypes.string,
     onRemove: PropTypes.func,
     _id: PropTypes.string

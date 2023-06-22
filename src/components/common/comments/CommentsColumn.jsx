@@ -1,21 +1,14 @@
-import { React, useState, useEffect } from 'react'
+import { React } from 'react'
 import { orderBy } from 'lodash'
 import PropTypes from 'prop-types'
 import AddCommentForm from './AddCommentForm'
 import CommentsList from './CommentsList'
-import API from '../../../api'
 import { useComments } from '../../../hooks/useComments'
 
-function CommentsColumn({ userId, users }) {
-    const [commentsForUser, setCommentsForUser] = useState([])
+function CommentsColumn({ users }) {
+    const { comments } = useComments()
     const { createComment } = useComments()
-    const sortedComments = orderBy(commentsForUser, ['created_at'], ['desc'])
-
-    useEffect(() => {
-        API.comments
-            .fetchCommentsForUser(userId)
-            .then(data => setCommentsForUser(data))
-    }, [])
+    const sortedComments = orderBy(comments, ['created_at'], ['desc'])
 
     const handleSubmitForm = data => {
         createComment(data)
@@ -25,13 +18,13 @@ function CommentsColumn({ userId, users }) {
     }
 
     const handleRemoveComment = id => {
-        API.comments
-            .remove(id)
-            .then(id =>
-                setCommentsForUser(
-                    commentsForUser.filter(comment => comment._id !== id)
-                )
-            )
+        // API.comments
+        //     .remove(id)
+        //     .then(id =>
+        //         setCommentsForUser(
+        //             commentsForUser.filter(comment => comment._id !== id)
+        //         )
+        //     )
     }
 
     return (
@@ -45,8 +38,8 @@ function CommentsColumn({ userId, users }) {
                 </div>
             </div>
 
-            {commentsForUser.length > 0 && (
-                <div className='card mb-3'>
+            {comments.length > 0 && (
+                <div className='card mt-3'>
                     <div className='card-body '>
                         <h2>Comments</h2>
                         <hr />
