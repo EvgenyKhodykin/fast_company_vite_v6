@@ -6,25 +6,15 @@ import CommentsList from './CommentsList'
 import { useComments } from '../../../hooks/useComments'
 
 function CommentsColumn({ users }) {
-    const { comments } = useComments()
-    const { createComment } = useComments()
+    const { comments, createComment, removeComment } = useComments()
     const sortedComments = orderBy(comments, ['created_at'], ['desc'])
 
     const handleSubmitForm = data => {
         createComment(data)
-        // API.comments
-        //     .add(comment)
-        //     .then(comment => setCommentsForUser([...commentsForUser, comment]))
     }
 
     const handleRemoveComment = id => {
-        // API.comments
-        //     .remove(id)
-        //     .then(id =>
-        //         setCommentsForUser(
-        //             commentsForUser.filter(comment => comment._id !== id)
-        //         )
-        //     )
+        removeComment(id)
     }
 
     return (
