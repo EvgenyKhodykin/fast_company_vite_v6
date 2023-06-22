@@ -4,6 +4,7 @@ import { toast } from 'react-toastify'
 import { useParams } from 'react-router-dom'
 import { useAuth } from './useAuth'
 import { nanoid } from 'nanoid'
+import commentService from '../services/comment.service'
 
 const CommentsContext = React.createContext()
 
@@ -13,13 +14,13 @@ export const useComments = () => {
 
 function CommentsProvider({ children }) {
     const [comments, setComments] = useState([])
-    const [isLoading] = useState(true)
+    const [isLoading, setLoading] = useState(true)
     const [error, setError] = useState(null)
     const { userId } = useParams()
     const { currentUser } = useAuth()
 
     useEffect(() => {
-        setComments(null)
+        getComments()
     }, [])
 
     useEffect(() => {
@@ -42,12 +43,28 @@ function CommentsProvider({ children }) {
             created_at: Date.now(),
             userId: currentUser._id
         }
-        console.log(comment)
+        try {
+            const { content } = await commentService.createComment(comment)
+            console.log(content)
+        } catch (error) {
+            errorCatcher(error)
+        }
+    }
+
+    async function getComments() {
+        try {
+            const { content } = await commentService.getComments(userId)
+            setComments(content)
+        } catch (error) {
+            errorCatcher(error)
+        } finally {
+            setLoading(false)
+        }
     }
 
     return (
         <CommentsContext.Provider
-            value={{ comments, isLoading, errorCatcher, createComment }}
+            value={{ comments, isLoading, createComment, getComments }}
         >
             {children}
         </CommentsContext.Provider>
