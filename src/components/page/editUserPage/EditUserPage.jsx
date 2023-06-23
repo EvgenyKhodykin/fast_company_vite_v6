@@ -73,6 +73,7 @@ export function EditUserPage() {
         if (!isValid) return
         try {
             await createUser(user)
+            navigate(`/users/${currentUser._id}`, { replace: true })
         } catch (error) {
             setErrors(error)
         }
@@ -131,7 +132,9 @@ export function EditUserPage() {
                                 <button
                                     type='button'
                                     className='btn btn-primary'
-                                    onClick={() => navigate(-1)}
+                                    onClick={() =>
+                                        navigate(`/users/${currentUser._id}`)
+                                    }
                                 >
                                     <i className='bi bi-caret-left'></i>
                                     Back

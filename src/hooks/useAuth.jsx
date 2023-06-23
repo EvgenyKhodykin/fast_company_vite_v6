@@ -140,7 +140,9 @@ function AuthProvider({ children }) {
     }
 
     return (
-        <AuthContext.Provider value={{ signUp, signIn, currentUser, logOut }}>
+        <AuthContext.Provider
+            value={{ signUp, signIn, currentUser, logOut, createUser }}
+        >
             {!isLoading ? children : <Loading />}
         </AuthContext.Provider>
     )
