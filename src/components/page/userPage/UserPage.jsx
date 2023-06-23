@@ -12,6 +12,11 @@ export function UserPage({ id }) {
     const { getUserById } = useUser()
     const user = getUserById(id)
 
+    // const handleChange = async => {
+    //     try {
+    //     } catch (error) {}
+    // }
+
     if (user) {
         return (
             <div className='container'>

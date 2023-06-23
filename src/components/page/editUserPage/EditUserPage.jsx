@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import TextField from '../../common/form/TextField'
 import SelectField from '../../common/form/SelectField'
 import RadioField from '../../common/form/RadioField'
@@ -13,7 +13,7 @@ import { useAuth } from '../../../hooks/useAuth'
 export function EditUserPage() {
     const { professions } = useProfessions()
     const { qualities } = useQualities()
-    const { currentUser, createUser } = useAuth()
+    const { currentUser, updateCurrentUser } = useAuth()
 
     const [user, setUser] = useState(currentUser)
     const [errors, setErrors] = useState({})
@@ -72,7 +72,7 @@ export function EditUserPage() {
         const isValid = validate()
         if (!isValid) return
         try {
-            await createUser(user)
+            await updateCurrentUser(user)
             navigate(`/users/${currentUser._id}`, { replace: true })
         } catch (error) {
             setErrors(error)
@@ -129,16 +129,15 @@ export function EditUserPage() {
                                 )}
                             />
                             <div className='d-flex justify-content-between'>
-                                <button
-                                    type='button'
-                                    className='btn btn-primary'
-                                    onClick={() =>
-                                        navigate(`/users/${currentUser._id}`)
-                                    }
-                                >
-                                    <i className='bi bi-caret-left'></i>
-                                    Back
-                                </button>
+                                <Link to={`/users/${currentUser._id}`}>
+                                    <button
+                                        type='button'
+                                        className='btn btn-primary'
+                                    >
+                                        <i className='bi bi-caret-left'></i>
+                                        Back
+                                    </button>
+                                </Link>
                                 <button
                                     type='submit'
                                     className='btn btn-primary w-50 mx-6'
