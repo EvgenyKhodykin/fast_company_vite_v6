@@ -22,19 +22,7 @@ export function UsersListPage() {
 
     const pageSize = 4
 
-    // const handleToggleBookmark = id => {
-    //     // setUsers(
-    //     //     users.map(user => {
-    //     //         if (user._id === id) {
-    //     //             return {
-    //     //                 ...user,
-    //     //                 bookmark: !user.bookmark
-    //     //             }
-    //     //         }
-    //     //         return user
-    //     //     })
-    //     // )
-    // }
+    const handleToggleBookmark = id => {}
 
     useEffect(() => {
         setCurrentPage(1)
@@ -68,7 +56,7 @@ export function UsersListPage() {
                 )
             } else if (selectedProf) {
                 filteredUsers = data.filter(
-                    user => user.profession === selectedProf._id
+                    user => user.profession === selectedProf.name
                 )
             } else filteredUsers = data
 
@@ -127,7 +115,7 @@ export function UsersListPage() {
                                 users={userCrop}
                                 onSort={handleSort}
                                 selectedSort={sortBy}
-                                // onToggleBookMark={handleToggleBookmark}
+                                onToggleBookMark={handleToggleBookmark}
                             />
                         )}
                         <div className='d-flex justify-content-center'>

@@ -1,90 +1,58 @@
 import { React, useEffect, useState } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
-import API from '../../../api'
+import { useNavigate } from 'react-router-dom'
 import TextField from '../../common/form/TextField'
 import SelectField from '../../common/form/SelectField'
 import RadioField from '../../common/form/RadioField'
 import MultiSelectField from '../../common/form/MultiSelectField'
 import Loading from '../../UI/Loading'
 import validator from '../../../utils/validator'
+import { useProfessions } from '../../../hooks/useProfessions'
+import { useQualities } from '../../../hooks/useQualities'
+import { useAuth } from '../../../hooks/useAuth'
 
 export function EditUserPage() {
-    const [user, setUser] = useState({
-        name: '',
-        email: '',
-        profession: '',
-        sex: 'male',
-        qualities: []
-    })
-    const [professions, setProfessions] = useState([])
-    const [qualities, setQualities] = useState([])
+    const { professions } = useProfessions()
+    const { qualities } = useQualities()
+    const { currentUser, createUser } = useAuth()
+
+    const [user, setUser] = useState(currentUser)
     const [errors, setErrors] = useState({})
-    const { userId } = useParams()
     const navigate = useNavigate()
 
-    const transformedQualities = user.qualities.map(quality => ({
-        value: quality._id,
-        label: quality.name,
-        color: quality.color
-    }))
-
-    useEffect(() => {
-        API.users.getById(userId).then(data => setUser(data))
-        API.professions.fetchAll().then(data => {
-            const professionsObject = Object.keys(data).map(professionName => ({
-                label: data[professionName].name,
-                value: data[professionName]._id
-            }))
-            setProfessions(professionsObject)
-        })
-        API.qualities.fetchAll().then(data => {
-            const qualitiesObject = Object.keys(data).map(optionName => ({
-                value: data[optionName]._id,
-                label: data[optionName].name,
-                color: data[optionName].color
-            }))
-            setQualities(qualitiesObject)
-        })
-    }, [])
+    const transformedDataArray = array => {
+        return array.map(item => ({
+            value: item._id,
+            label: item.name,
+            color: item.color
+        }))
+    }
 
     const handleChange = target => {
-        setUser(prevState => ({
-            ...prevState,
-            [target.name]: target.value
-        }))
-    }
-
-    const getProfession = value => {
-        if (typeof value === 'object') return value
-        return professions
-            .filter(profession => profession.label === value)
-            .map(profession => ({
-                _id: profession.value,
-                name: profession.label
-            }))[0]
-    }
-
-    const getQualities = value => {
-        if (value[0]._id !== undefined) return value
-        return value.map(quality => ({
-            _id: quality.value,
-            name: quality.label,
-            color: quality.color
-        }))
+        if (target.name === 'qualities') {
+            setUser(prevState => ({
+                ...prevState,
+                [target.name]: target.value.map(item => item.value)
+            }))
+        } else {
+            setUser(prevState => ({
+                ...prevState,
+                [target.name]: target.value
+            }))
+        }
     }
 
     const validatorConfig = {
         email: {
             isRequired: {
-                message: 'Email обязателен для заполнения'
+                message: 'Email field is empty'
             },
             isEmail: {
-                message: 'Email введён некорректно'
+                message: 'Incorrect Email'
             }
         },
         name: {
             isRequired: {
-                message: 'Имя не должно быть пустым'
+                message: 'Name field is empty'
             }
         }
     }
@@ -99,63 +67,65 @@ export function EditUserPage() {
         return Object.keys(errors).length === 0
     }
 
-    const handleSubmit = event => {
+    const handleSubmit = async event => {
         event.preventDefault()
         const isValid = validate()
         if (!isValid) return
-        API.users
-            .update(userId, {
-                ...user,
-                profession: getProfession(user.profession),
-                qualities: getQualities(user.qualities)
-            })
-            .then(data => navigate(`/users/${data._id}`))
+        try {
+            await createUser(user)
+        } catch (error) {
+            setErrors(error)
+        }
     }
 
-    if (professions.length > 0 && qualities.length > 0) {
+    if (professions.length > 0 && qualities.length > 0 && currentUser) {
         return (
             <div className='container mt-5'>
                 <div className='row '>
                     <div className='col-md-6 offset-md-3 shadow p-4'>
                         <form onSubmit={handleSubmit}>
                             <TextField
-                                label='Имя'
+                                label='Name'
                                 name='name'
                                 value={user.name}
                                 onChange={handleChange}
                                 error={errors.name}
                             />
                             <TextField
-                                label='Электронная почта'
+                                label='Email'
                                 name='email'
                                 value={user.email}
                                 onChange={handleChange}
                                 error={errors.email}
                             />
                             <SelectField
-                                label='Выбери свою профессию'
+                                label='Choose profession'
                                 name='profession'
                                 defaultOption='Choose...'
-                                value={user.profession.name}
-                                options={professions}
+                                value={user.profession}
+                                options={transformedDataArray(professions)}
                                 onChange={handleChange}
                             />
                             <RadioField
                                 options={[
-                                    { name: 'Мужской', value: 'male' },
-                                    { name: 'Женский', value: 'female' }
+                                    { name: 'Male', value: 'male' },
+                                    { name: 'Female', value: 'female' }
                                 ]}
                                 name='sex'
-                                label='Выберите пол'
+                                label='Sex'
                                 value={user.sex}
                                 onChange={handleChange}
                             />
                             <MultiSelectField
                                 name='qualities'
-                                label='Выберите качества'
-                                options={qualities}
+                                label='Choose qualities'
+                                options={transformedDataArray(qualities)}
                                 onChange={handleChange}
-                                defaultValue={transformedQualities}
+                                defaultValue={transformedDataArray(
+                                    qualities
+                                ).filter(quality =>
+                                    user.qualities.includes(quality.value)
+                                )}
                             />
                             <div className='d-flex justify-content-between'>
                                 <button
@@ -164,13 +134,13 @@ export function EditUserPage() {
                                     onClick={() => navigate(-1)}
                                 >
                                     <i className='bi bi-caret-left'></i>
-                                    Назад
+                                    Back
                                 </button>
                                 <button
                                     type='submit'
                                     className='btn btn-primary w-50 mx-6'
                                 >
-                                    Обновить
+                                    Update
                                 </button>
                             </div>
                         </form>
