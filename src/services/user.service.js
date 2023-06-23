@@ -22,7 +22,7 @@ const userService = {
         return data
     },
     updateCurrentUser: async payload => {
-        const { data } = await httpService.put(
+        const { data } = await httpService.patch(
             userEndPoint + payload._id,
             payload
         )
