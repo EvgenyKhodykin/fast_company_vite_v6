@@ -24,6 +24,12 @@ function AddCommentForm({ onSubmit }) {
         setErrors({})
     }
 
+    const enterPressHandler = event => {
+        if (event.key === 'Enter') {
+            handleSubmit(event)
+        }
+    }
+
     const validatorConfig = {
         content: {
             isRequired: {
@@ -57,6 +63,7 @@ function AddCommentForm({ onSubmit }) {
                         name='content'
                         value={textValue}
                         onChange={handleTextChange}
+                        onKeyDown={enterPressHandler}
                     />
                 </div>
                 {errors.content && (
