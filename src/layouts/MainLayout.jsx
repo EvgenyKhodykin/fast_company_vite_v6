@@ -5,12 +5,9 @@ import NavBar from '../components/UI/NavBar'
 export function MainLayout() {
     return (
         <>
-            <header>
-                <NavBar />
-            </header>
-            <main>
-                <Outlet />
-            </main>
+            <NavBar />
+
+            <Outlet />
         </>
     )
 }

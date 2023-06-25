@@ -7,42 +7,44 @@ function NavBar() {
     const { currentUser } = useAuth()
 
     return (
-        <nav className='navbar mx-2 bg-light'>
-            <div className='container-fluid'>
-                <ul className='nav nav-pills'>
-                    <li className='nav-item'>
-                        <NavLink
-                            className='nav-link'
-                            to='/'
-                        >
-                            Main
-                        </NavLink>
-                    </li>
-                    {currentUser && (
+        <header>
+            <nav className='navbar mx-2 bg-light'>
+                <div className='container-fluid'>
+                    <ul className='nav nav-pills'>
                         <li className='nav-item'>
                             <NavLink
                                 className='nav-link'
-                                to='/users'
+                                to='/'
                             >
-                                Users
+                                Main
                             </NavLink>
                         </li>
-                    )}
-                </ul>
-                <div className='d-flex'>
-                    {currentUser ? (
-                        <NavProfile />
-                    ) : (
-                        <NavLink
-                            className='nav-link'
-                            to='/login'
-                        >
-                            Login
-                        </NavLink>
-                    )}
+                        {currentUser && (
+                            <li className='nav-item'>
+                                <NavLink
+                                    className='nav-link'
+                                    to='/users'
+                                >
+                                    Users
+                                </NavLink>
+                            </li>
+                        )}
+                    </ul>
+                    <div className='d-flex'>
+                        {currentUser ? (
+                            <NavProfile />
+                        ) : (
+                            <NavLink
+                                className='nav-link'
+                                to='/login'
+                            >
+                                Login
+                            </NavLink>
+                        )}
+                    </div>
                 </div>
-            </div>
-        </nav>
+            </nav>
+        </header>
     )
 }
 
