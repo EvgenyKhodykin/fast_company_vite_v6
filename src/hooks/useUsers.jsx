@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import userService from '../services/user.service'
 import { toast } from 'react-toastify'
+import { useAuth } from './useAuth'
 import Loading from '../components/UI/Loading'
 
 const UserContext = React.createContext()
@@ -14,6 +15,7 @@ function UserProvider({ children }) {
     const [users, setUsers] = useState([])
     const [isLoading, setLoading] = useState(true)
     const [error, setError] = useState(null)
+    const { currentUser } = useAuth()
 
     useEffect(() => {
         getUsers()
@@ -40,6 +42,17 @@ function UserProvider({ children }) {
             errorCatcher()
         }
     }
+
+    useEffect(() => {
+        if (!isLoading) {
+            const newUsers = [...users]
+            const indexUser = newUsers.findIndex(
+                user => user._id === currentUser._id
+            )
+            newUsers[indexUser] = currentUser
+            setUsers(newUsers)
+        }
+    }, [currentUser])
 
     const getUserById = id => {
         return users.find(user => user._id === id)
