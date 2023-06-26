@@ -1,14 +1,14 @@
 import { React, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import TextField from '../../common/form/TextField'
-import SelectField from '../../common/form/SelectField'
-import RadioField from '../../common/form/RadioField'
-import MultiSelectField from '../../common/form/MultiSelectField'
-import Loading from '../../UI/Loading'
-import validator from '../../../utils/validator'
-import { useProfessions } from '../../../hooks/useProfessions'
-import { useQualities } from '../../../hooks/useQualities'
-import { useAuth } from '../../../hooks/useAuth'
+import TextField from '../common/form/TextField'
+import SelectField from '../common/form/SelectField'
+import RadioField from '../common/form/RadioField'
+import MultiSelectField from '../common/form/MultiSelectField'
+import Loading from '../UI/Loading'
+import validator from '../../utils/validator'
+import { useProfessions } from '../../hooks/useProfessions'
+import { useQualities } from '../../hooks/useQualities'
+import { useAuth } from '../../hooks/useAuth'
 
 export function EditUserPage() {
     const { professions } = useProfessions()

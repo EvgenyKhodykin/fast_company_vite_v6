@@ -1,7 +1,7 @@
 import React from 'react'
 import useMockData from '../../utils/mockData'
 
-function MainPage() {
+export function MainPage() {
     const { error, initialize, progress, status } = useMockData()
 
     const handleClick = () => {
@@ -25,5 +25,3 @@ function MainPage() {
         </div>
     )
 }
-
-export default MainPage

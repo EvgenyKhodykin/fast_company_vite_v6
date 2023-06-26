@@ -1,12 +1,12 @@
 import { React } from 'react'
 import PropTypes from 'prop-types'
-import Loading from '../../UI/Loading'
-import UserCard from '../../UI/UserCard'
-import QualitiesCard from '../../UI/QualitiesCard'
-import MeetingsCard from '../../UI/MeetingsCard'
-import CommentsColumn from '../../common/comments/CommentsColumn'
-import { useUser } from '../../../hooks/useUsers'
-import CommentsProvider from '../../../hooks/useComments'
+import Loading from '../UI/Loading'
+import UserCard from '../UI/UserCard'
+import QualitiesCard from '../UI/QualitiesCard'
+import MeetingsCard from '../UI/MeetingsCard'
+import CommentsColumn from '../common/comments/CommentsColumn'
+import { useUser } from '../../hooks/useUsers'
+import CommentsProvider from '../../hooks/useComments'
 
 export function UserPage({ id }) {
     const { getUserById } = useUser()

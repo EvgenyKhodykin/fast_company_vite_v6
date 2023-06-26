@@ -1,7 +1,7 @@
 import { React } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { MainLayout, LoginLayout, UsersLayout, LogOut } from './layouts'
-import MainPage from './components/UI/MainPage'
+import { MainPage } from './components/pages'
 import { ToastContainer } from 'react-toastify'
 import ProfessionsProvider from './hooks/useProfessions'
 import QualitiesProvider from './hooks/useQualities'

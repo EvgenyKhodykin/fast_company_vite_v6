@@ -1,8 +1,6 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import { UsersListPage } from '../components/page/usersListPage'
-import { UserPage } from '../components/page/userPage'
-import { EditUserPage } from '../components/page/editUserPage/EditUserPage'
+import { UsersListPage, UserPage, EditUserPage } from '../components/pages'
 import UserProvider from '../hooks/useUsers'
 
 export function UsersLayout() {
