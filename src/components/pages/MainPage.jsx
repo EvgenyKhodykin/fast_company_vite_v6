@@ -17,6 +17,7 @@ export function MainPage() {
                 {error && <li>Error: {error}</li>}
             </ul>
             <button
+                disabled
                 className='btn btn-primary mt-4'
                 onClick={handleClick}
             >
