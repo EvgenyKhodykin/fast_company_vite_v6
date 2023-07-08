@@ -7,12 +7,14 @@ import MultiSelectField from '../common/form/MultiSelectField'
 import Loading from '../UI/Loading'
 import validator from '../../utils/validator'
 import { useProfessions } from '../../hooks/useProfessions'
-import { useQualities } from '../../hooks/useQualities'
 import { useAuth } from '../../hooks/useAuth'
+import { useSelector } from 'react-redux'
+import { getQualities, getQualitiesLoadingStatus } from '../../store/qualities'
 
 export function EditUserPage() {
     const { professions } = useProfessions()
-    const { qualities } = useQualities()
+    const qualities = useSelector(getQualities())
+    const qualitiesLoading = useSelector(getQualitiesLoadingStatus())
     const { currentUser, updateCurrentUser } = useAuth()
 
     const [user, setUser] = useState(currentUser)
@@ -79,7 +81,7 @@ export function EditUserPage() {
         }
     }
 
-    if (professions.length > 0 && qualities.length > 0 && currentUser) {
+    if (professions.length > 0 && currentUser && !qualitiesLoading) {
         return (
             <div className='container mt-5'>
                 <div className='row '>
@@ -122,10 +124,8 @@ export function EditUserPage() {
                                 label='Choose qualities'
                                 options={transformedDataArray(qualities)}
                                 onChange={handleChange}
-                                defaultValue={transformedDataArray(
-                                    qualities
-                                ).filter(quality =>
-                                    user.qualities.includes(quality.value)
+                                defaultValue={transformedDataArray(qualities).filter(
+                                    quality => user.qualities.includes(quality.value)
                                 )}
                             />
                             <div className='d-flex justify-content-between'>
