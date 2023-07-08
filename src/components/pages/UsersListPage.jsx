@@ -8,13 +8,15 @@ import SearchStatus from '../UI/SearchStatus'
 import UserTable from '../UI/UsersTable'
 import Loading from '../UI/Loading'
 import { useUser } from '../../hooks/useUsers'
-import { useProfessions } from '../../hooks/useProfessions'
 import { useAuth } from '../../hooks/useAuth'
+import { useSelector } from 'react-redux'
+import { getProfessions, getProfessionsLoadingStatus } from '../../store/professions'
 
 export function UsersListPage() {
     const { users } = useUser()
     const { currentUser } = useAuth()
-    const { isLoading: professinsLoading, professions } = useProfessions()
+    const professions = useSelector(getProfessions())
+    const professionsLoading = useSelector(getProfessionsLoadingStatus())
     const [currentPage, setCurrentPage] = useState(1)
     const [selectedProf, setSelectedProf] = useState()
     const [sortBy, setSortBy] = useState({ iter: 'name', order: 'asc' })
@@ -67,11 +69,7 @@ export function UsersListPage() {
 
         const count = filteredUsers.length
 
-        const sortedUsers = _.orderBy(
-            filteredUsers,
-            [sortBy.path],
-            [sortBy.order]
-        )
+        const sortedUsers = _.orderBy(filteredUsers, [sortBy.path], [sortBy.order])
 
         const userCrop = paginate(sortedUsers, currentPage, pageSize)
 
@@ -80,7 +78,7 @@ export function UsersListPage() {
             setSearchValue('')
         }
 
-        if (!professinsLoading && professions && users) {
+        if (!professionsLoading && users) {
             return (
                 <div className='d-flex'>
                     <div className='d-flex flex-column flex-shrink-0 p-3'>

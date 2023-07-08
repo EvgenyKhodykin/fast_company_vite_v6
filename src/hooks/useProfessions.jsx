@@ -32,7 +32,7 @@ function ProfessionsProvider({ children }) {
 
     const getProfessionsList = async () => {
         try {
-            const { content } = await professionService.get()
+            const { content } = await professionService.fetchAll()
             setProfessions(content)
             setLoading(false)
         } catch (error) {

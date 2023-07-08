@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import qualityService from '../services/quality.service'
+import isOutdated from '../utils/isOutdated'
 
 const qualitiesSlice = createSlice({
     name: 'qualities',
@@ -28,13 +29,6 @@ const qualitiesSlice = createSlice({
 const { actions, reducer: qualitiesReducer } = qualitiesSlice
 const { qualitiesRecieved, qualitiesRequested, qualitiesRequestFailed } = actions
 
-function isOutdated(date) {
-    if (Date.now() - date > 10 * 60 * 1000) {
-        return true
-    }
-    return false
-}
-
 export const loadQualitiesList = () => async (dispatch, getState) => {
     const { lastFetch } = getState().qualities
     if (isOutdated(lastFetch)) {
@@ -50,6 +44,7 @@ export const loadQualitiesList = () => async (dispatch, getState) => {
 
 export const getQualities = () => state => state.qualities.entities
 export const getQualitiesLoadingStatus = () => state => state.qualities.isLoading
+
 export const getQualitiesByIds = qualitiesIds => state => {
     if (state.qualities.entities) {
         const qualitiesArray = []

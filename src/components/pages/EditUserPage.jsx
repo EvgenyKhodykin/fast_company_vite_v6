@@ -6,14 +6,15 @@ import RadioField from '../common/form/RadioField'
 import MultiSelectField from '../common/form/MultiSelectField'
 import Loading from '../UI/Loading'
 import validator from '../../utils/validator'
-import { useProfessions } from '../../hooks/useProfessions'
 import { useAuth } from '../../hooks/useAuth'
 import { useSelector } from 'react-redux'
 import { getQualities, getQualitiesLoadingStatus } from '../../store/qualities'
+import { getProfessions, getProfessionsLoadingStatus } from '../../store/professions'
 
 export function EditUserPage() {
-    const { professions } = useProfessions()
+    const professions = useSelector(getProfessions())
     const qualities = useSelector(getQualities())
+    const professionsLoading = useSelector(getProfessionsLoadingStatus())
     const qualitiesLoading = useSelector(getQualitiesLoadingStatus())
     const { currentUser, updateCurrentUser } = useAuth()
 
@@ -81,7 +82,7 @@ export function EditUserPage() {
         }
     }
 
-    if (professions.length > 0 && currentUser && !qualitiesLoading) {
+    if (!professionsLoading && currentUser && !qualitiesLoading) {
         return (
             <div className='container mt-5'>
                 <div className='row '>
