@@ -3,15 +3,19 @@ import PropTypes from 'prop-types'
 import Qualitie from './Qualitie'
 import { useDispatch, useSelector } from 'react-redux'
 import {
-    getQualitiesByIds,
+    getQualities,
     getQualitiesLoadingStatus,
     loadQualitiesList
 } from '../../../store/qualities'
 
 export function QualitiesList({ qualities }) {
     const dispatch = useDispatch()
+    const allQualities = useSelector(getQualities())
     const isLoading = useSelector(getQualitiesLoadingStatus())
-    const qualitiesList = useSelector(getQualitiesByIds(qualities))
+
+    const qualitiesList = allQualities.filter(quality =>
+        qualities.includes(quality._id)
+    )
 
     useEffect(() => {
         dispatch(loadQualitiesList())
