@@ -1,7 +1,6 @@
 import React from 'react'
 import { Navigate, useParams } from 'react-router-dom'
 import { UsersListPage, UserPage, EditUserPage } from '../components/pages'
-import UserProvider from '../hooks/useUsers'
 import { useAuth } from '../hooks/useAuth'
 
 export function UsersLayout() {
@@ -10,21 +9,19 @@ export function UsersLayout() {
 
     return (
         <>
-            <UserProvider>
-                {userId ? (
-                    edit ? (
-                        userId === currentUser._id ? (
-                            <EditUserPage />
-                        ) : (
-                            <Navigate to={`/users/${currentUser._id}/edit`} />
-                        )
+            {userId ? (
+                edit ? (
+                    userId === currentUser._id ? (
+                        <EditUserPage />
                     ) : (
-                        <UserPage id={userId} />
+                        <Navigate to={`/users/${currentUser._id}/edit`} />
                     )
                 ) : (
-                    <UsersListPage />
-                )}
-            </UserProvider>
+                    <UserPage id={userId} />
+                )
+            ) : (
+                <UsersListPage />
+            )}
         </>
     )
 }

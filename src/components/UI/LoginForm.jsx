@@ -2,13 +2,14 @@ import { React, useEffect, useState } from 'react'
 import TextField from '../common/form/TextField'
 import validator from '../../utils/validator'
 import CheckBoxField from '../common/form/CheckBoxField'
-import { useAuth } from '../../hooks/useAuth'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { signIn } from '../../store/users'
 
 function LoginForm() {
+    const dispatch = useDispatch()
     const [data, setData] = useState({ email: '', password: '', stayOn: false })
     const [errors, setErrors] = useState({})
-    const { signIn } = useAuth()
     const navigate = useNavigate()
     const location = useLocation()
     const fromPage = location.state?.from.pathname || '/'
@@ -45,16 +46,12 @@ function LoginForm() {
 
     const isValid = Object.keys(errors).length === 0
 
-    const handleSubmit = async event => {
+    const handleSubmit = event => {
         event.preventDefault()
         const isValid = validate()
         if (!isValid) return
-        try {
-            await signIn(data)
-            navigate(fromPage)
-        } catch (error) {
-            setErrors(error)
-        }
+        dispatch(signIn(data))
+        navigate(fromPage)
     }
 
     return (
