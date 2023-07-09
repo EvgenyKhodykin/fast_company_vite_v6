@@ -35,7 +35,7 @@ function UserProvider({ children }) {
 
     const getUsers = async () => {
         try {
-            const { content } = await userService.get()
+            const { content } = await userService.fetchAll()
             setUsers(content)
             setLoading(false)
         } catch (error) {

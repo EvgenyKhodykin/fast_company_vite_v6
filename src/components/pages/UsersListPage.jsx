@@ -7,13 +7,13 @@ import GroupList from '../common/GroupList'
 import SearchStatus from '../UI/SearchStatus'
 import UserTable from '../UI/UsersTable'
 import Loading from '../UI/Loading'
-import { useUser } from '../../hooks/useUsers'
 import { useAuth } from '../../hooks/useAuth'
 import { useSelector } from 'react-redux'
 import { getProfessions, getProfessionsLoadingStatus } from '../../store/professions'
+import { getUsersList } from '../../store/users'
 
 export function UsersListPage() {
-    const { users } = useUser()
+    const users = useSelector(getUsersList())
     const { currentUser } = useAuth()
     const professions = useSelector(getProfessions())
     const professionsLoading = useSelector(getProfessionsLoadingStatus())
