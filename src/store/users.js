@@ -32,7 +32,8 @@ const usersSlice = createSlice({
             state.entities.push(action.payload)
         },
         authRequestSuccess(state, action) {
-            state.auth = { ...action.payload, isLoggedIn: true }
+            state.auth = action.payload
+            state.isLoggedIn = true
         },
         authRequestFailed(state, action) {
             state.error = action.payload
