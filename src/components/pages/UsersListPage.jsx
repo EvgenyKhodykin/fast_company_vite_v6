@@ -14,7 +14,10 @@ import { getUsersList } from '../../store/users'
 
 export function UsersListPage() {
     const users = useSelector(getUsersList())
+
     const { currentUser } = useAuth()
+    // const currentUser = useSelector(getCurrentUserId()) // Why null???
+
     const professions = useSelector(getProfessions())
     const professionsLoading = useSelector(getProfessionsLoadingStatus())
     const [currentPage, setCurrentPage] = useState(1)
