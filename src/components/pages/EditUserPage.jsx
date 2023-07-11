@@ -16,8 +16,8 @@ export function EditUserPage() {
     const qualities = useSelector(getQualities())
     const professionsLoading = useSelector(getProfessionsLoadingStatus())
     const qualitiesLoading = useSelector(getQualitiesLoadingStatus())
-    const { currentUser, updateCurrentUser } = useAuth()
 
+    const { currentUser, updateCurrentUser } = useAuth()
     const [user, setUser] = useState(currentUser)
     const [errors, setErrors] = useState({})
     const navigate = useNavigate()

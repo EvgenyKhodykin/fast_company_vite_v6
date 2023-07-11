@@ -9,8 +9,6 @@ const rootReducer = combineReducers({
     users: usersReducer
 })
 
-function createStore() {
-    return configureStore({ reducer: rootReducer })
-}
+const store = configureStore({ reducer: rootReducer })
 
-export default createStore
+export default store

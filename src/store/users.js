@@ -11,7 +11,8 @@ const usersSlice = createSlice({
         isLoading: true,
         error: null,
         auth: null,
-        isLoggedIn: false
+        isLoggedIn: false,
+        dataLoaded: false
     },
     reducers: {
         usersRequested(state) {
@@ -19,6 +20,7 @@ const usersSlice = createSlice({
         },
         usersRecieved(state, action) {
             state.entities = action.payload
+            state.dataLoaded = true
             state.isLoading = false
         },
         usersRequestFailed(state, action) {
@@ -123,5 +125,7 @@ export const getUserById = userId => state => {
         return state.users.entities.find(user => user._id === userId)
     }
 }
+export const getIsLoggedIn = () => state => state.users.isLoggedIn
+export const getDataStatus = () => state => state.users.dataLoaded
 
 export default usersReducer
