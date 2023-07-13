@@ -1,30 +1,22 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Navigate, useParams } from 'react-router-dom'
 import { UsersListPage, UserPage, EditUserPage } from '../components/pages'
-import { useAuth } from '../hooks/useAuth'
-import { useDispatch, useSelector } from 'react-redux'
-import { getDataStatus, loadUsersList } from '../store/users'
-import Loading from '../components/UI/Loading'
+import { useSelector } from 'react-redux'
+import { getCurrentUserId } from '../store/users'
+import UsersLoader from '../components/UI/hoc/UsersLoader'
 
 export function UsersLayout() {
     const { userId, edit } = useParams()
-    const { currentUser } = useAuth()
-    const dataStatus = useSelector(getDataStatus())
-    const dispatch = useDispatch()
+    const currentUserId = useSelector(getCurrentUserId())
 
-    useEffect(() => {
-        if (!dataStatus) dispatch(loadUsersList())
-    }, [])
-
-    if (!dataStatus) return <Loading />
     return (
-        <>
+        <UsersLoader>
             {userId ? (
                 edit ? (
-                    userId === currentUser._id ? (
+                    userId === currentUserId ? (
                         <EditUserPage />
                     ) : (
-                        <Navigate to={`/users/${currentUser._id}/edit`} />
+                        <Navigate to={`/users/${currentUserId}/edit`} />
                     )
                 ) : (
                     <UserPage id={userId} />
@@ -32,6 +24,6 @@ export function UsersLayout() {
             ) : (
                 <UsersListPage />
             )}
-        </>
+        </UsersLoader>
     )
 }

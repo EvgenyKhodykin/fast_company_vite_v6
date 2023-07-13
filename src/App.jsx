@@ -1,4 +1,4 @@
-import { React, useEffect } from 'react'
+import { React } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import 'react-toastify/dist/ReactToastify.css'
 import { MainLayout, LoginLayout, UsersLayout, LogOut } from './layouts'
@@ -6,49 +6,40 @@ import { MainPage } from './components/pages'
 import { ToastContainer } from 'react-toastify'
 import AuthProvider from './hooks/useAuth'
 import ProtectedRoutes from './components/common/ProtectedRoutes'
-import { useDispatch } from 'react-redux'
-import { loadQualitiesList } from './store/qualities'
-import { loadProfessionsList } from './store/professions'
-import { loadUsersList } from './store/users'
+import AppLoader from './components/UI/hoc/AppLoader'
 
 function App() {
-    const dispatch = useDispatch()
-
-    useEffect(() => {
-        dispatch(loadQualitiesList())
-        dispatch(loadProfessionsList())
-        dispatch(loadUsersList())
-    }, [])
-
     return (
         <>
-            <AuthProvider>
-                <Routes>
-                    <Route
-                        path='/'
-                        element={<MainLayout />}
-                    >
+            <AppLoader>
+                <AuthProvider>
+                    <Routes>
                         <Route
-                            index
-                            element={<MainPage />}
-                        />
-                        <Route
-                            path='login/:type?'
-                            element={<LoginLayout />}
-                        />
-                        <Route element={<ProtectedRoutes />}>
+                            path='/'
+                            element={<MainLayout />}
+                        >
                             <Route
-                                path='users/:userId?/:edit?'
-                                element={<UsersLayout />}
+                                index
+                                element={<MainPage />}
+                            />
+                            <Route
+                                path='login/:type?'
+                                element={<LoginLayout />}
+                            />
+                            <Route element={<ProtectedRoutes />}>
+                                <Route
+                                    path='users/:userId?/:edit?'
+                                    element={<UsersLayout />}
+                                />
+                            </Route>
+                            <Route
+                                path='logout'
+                                element={<LogOut />}
                             />
                         </Route>
-                        <Route
-                            path='logout'
-                            element={<LogOut />}
-                        />
-                    </Route>
-                </Routes>
-            </AuthProvider>
+                    </Routes>
+                </AuthProvider>
+            </AppLoader>
             <ToastContainer />
         </>
     )

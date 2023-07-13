@@ -1,16 +1,16 @@
 import React from 'react'
 import { Navigate, Outlet, useLocation } from 'react-router-dom'
 import PropTypes from 'prop-types'
-// import { useSelector } from 'react-redux'
-import { useAuth } from '../../hooks/useAuth'
-// import { getIsLoggedIn } from '../../store/users'
+import { useSelector } from 'react-redux'
+import { getIsLoggedIn } from '../../store/users'
 
 function ProtectedRoutes() {
-    const { currentUser } = useAuth()
-    // const isLoggedIn = useSelector(getIsLoggedIn())
+    const isLoggedIn = useSelector(getIsLoggedIn())
     const location = useLocation()
 
-    return currentUser ? (
+    console.log(isLoggedIn)
+
+    return isLoggedIn ? (
         <Outlet />
     ) : (
         <Navigate

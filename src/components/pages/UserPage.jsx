@@ -10,16 +10,16 @@ import { useSelector } from 'react-redux'
 import { getUserById } from '../../store/users'
 
 export function UserPage({ id }) {
-    const user = useSelector(getUserById(id))
+    const currentUser = useSelector(getUserById(id))
 
-    if (user) {
+    if (currentUser) {
         return (
             <div className='container'>
                 <div className='row gutters-sm'>
                     <div className='col-md-4 mb-3'>
-                        <UserCard {...user} />
-                        <QualitiesCard {...user} />
-                        <MeetingsCard {...user} />
+                        <UserCard {...currentUser} />
+                        <QualitiesCard {...currentUser} />
+                        <MeetingsCard {...currentUser} />
                     </div>
                     <div className='col-md-8'>
                         <CommentsProvider>

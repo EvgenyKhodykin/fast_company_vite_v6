@@ -1,13 +1,12 @@
 import { React } from 'react'
 import { NavLink } from 'react-router-dom'
-// import { useAuth } from '../../hooks/useAuth'
 import NavProfile from './NavProfile'
 import { getIsLoggedIn } from '../../store/users'
 import { useSelector } from 'react-redux'
 
 function NavBar() {
-    // const { currentUser } = useAuth()
     const isLoggedIn = useSelector(getIsLoggedIn())
+    console.log(isLoggedIn)
 
     return (
         <header>

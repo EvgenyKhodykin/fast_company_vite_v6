@@ -12,8 +12,8 @@ function NavProfile() {
         setOpen(prevState => !prevState)
     }
 
-    if (currentUser) {
-        return (
+    return (
+        currentUser && (
             <div
                 className='dropdown'
                 onClick={toggleMenu}
@@ -43,7 +43,7 @@ function NavProfile() {
                 </div>
             </div>
         )
-    }
+    )
 }
 
 export default NavProfile

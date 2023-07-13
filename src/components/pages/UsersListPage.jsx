@@ -7,16 +7,13 @@ import GroupList from '../common/GroupList'
 import SearchStatus from '../UI/SearchStatus'
 import UserTable from '../UI/UsersTable'
 import Loading from '../UI/Loading'
-import { useAuth } from '../../hooks/useAuth'
 import { useSelector } from 'react-redux'
 import { getProfessions, getProfessionsLoadingStatus } from '../../store/professions'
-import { getUsersList } from '../../store/users'
+import { getCurrentUserId, getUsersList } from '../../store/users'
 
 export function UsersListPage() {
     const users = useSelector(getUsersList())
-
-    const { currentUser } = useAuth()
-    // const currentUser = useSelector(getCurrentUserId()) // Why null???
+    const currentUserId = useSelector(getCurrentUserId())
 
     const professions = useSelector(getProfessions())
     const professionsLoading = useSelector(getProfessionsLoadingStatus())
@@ -65,7 +62,7 @@ export function UsersListPage() {
                 )
             } else filteredUsers = data
 
-            return filteredUsers.filter(user => user._id !== currentUser._id)
+            return filteredUsers.filter(user => user._id !== currentUserId)
         }
 
         const filteredUsers = filterUsers(users)
