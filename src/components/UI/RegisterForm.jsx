@@ -9,11 +9,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getQualities } from '../../store/qualities'
 import { getProfessions } from '../../store/professions'
 import { signUp } from '../../store/users'
-import { useNavigate } from 'react-router'
 
 function RegisterForm() {
     const dispatch = useDispatch()
-    const navigate = useNavigate()
 
     const [data, setData] = useState({
         email: '',
@@ -108,7 +106,6 @@ function RegisterForm() {
             qualities: data.qualities.map(quality => quality.value)
         }
         dispatch(signUp(newData))
-        navigate('/')
     }
 
     return (

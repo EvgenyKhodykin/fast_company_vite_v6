@@ -129,6 +129,7 @@ export const signUp =
                     ...rest
                 })
             )
+            history.navigate('/')
         } catch (error) {
             dispatch(authRequestFailed(error.message))
         }

@@ -10,7 +10,6 @@ function LoginForm() {
     const dispatch = useDispatch()
     const [data, setData] = useState({ email: '', password: '', stayOn: false })
     const loginError = useSelector(getAuthError())
-    console.log(loginError)
     const [errors, setErrors] = useState({})
     const location = useLocation()
     const fromPage = location.state?.from.pathname || '/'
@@ -45,8 +44,7 @@ function LoginForm() {
         return Object.keys(errors).length === 0
     }
 
-    let isValid = true
-    if (Object.keys(errors).length === 0 && loginError === null) isValid = false
+    const isValid = Object.keys(errors).length === 0
 
     const handleSubmit = event => {
         event.preventDefault()
@@ -82,7 +80,7 @@ function LoginForm() {
             {loginError && <p className='text-danger'>{loginError}</p>}
 
             <button
-                disabled={isValid}
+                disabled={!isValid}
                 className='btn btn-primary w-100 mx-auto'
             >
                 Log In
