@@ -14,9 +14,11 @@ import {
 import Loading from '../../UI/Loading'
 import { useParams } from 'react-router-dom'
 import { nanoid } from 'nanoid'
+import { getCurrentUserId } from '../../../store/users'
 
 function CommentsColumn({ users }) {
     const { userId } = useParams()
+    const currentUserId = useSelector(getCurrentUserId())
     const dispatch = useDispatch()
     const isLoading = useSelector(getCommentsLoadingStatus())
     const comments = useSelector(getComments())
@@ -32,7 +34,7 @@ function CommentsColumn({ users }) {
             _id: nanoid(),
             pageId: userId,
             created_at: Date.now(),
-            userId
+            userId: currentUserId
         }
         dispatch(createComment(comment))
     }
