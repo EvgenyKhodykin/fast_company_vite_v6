@@ -8,8 +8,6 @@ function ProtectedRoutes() {
     const isLoggedIn = useSelector(getIsLoggedIn())
     const location = useLocation()
 
-    console.log(isLoggedIn)
-
     return isLoggedIn ? (
         <Outlet />
     ) : (
