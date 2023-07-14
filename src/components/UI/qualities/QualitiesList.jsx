@@ -13,15 +13,14 @@ export function QualitiesList({ qualities }) {
     const allQualities = useSelector(getQualities())
     const isLoading = useSelector(getQualitiesLoadingStatus())
 
-    const qualitiesList = allQualities.filter(quality =>
-        qualities.includes(quality._id)
-    )
-
     useEffect(() => {
         dispatch(loadQualitiesList())
     }, [])
 
-    if (!isLoading) {
+    if (!isLoading && allQualities.length > 0) {
+        const qualitiesList = allQualities.filter(quality =>
+            qualities.includes(quality._id)
+        )
         return (
             <>
                 {qualitiesList.map(item => (
