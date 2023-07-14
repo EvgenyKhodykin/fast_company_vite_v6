@@ -3,13 +3,13 @@
 function generateAuthError(message) {
     switch (message) {
         case 'INVALID_PASSWORD':
-            return 'Incorrect Password &#128533;'
+            return `Incorrect Password ${String.fromCodePoint(0x1f914)}`
 
         case 'EMAIL_EXISTS':
-            return 'This Email already exists &#128558;'
+            return `This Email already exists ${String.fromCodePoint(0x1f914)}`
 
         case 'EMAIL_NOT_FOUND':
-            return 'Incorrect Email &#128533;'
+            return `Incorrect Email ${String.fromCodePoint(0x1f914)}`
 
         default:
             return 'Too many login attempts. Try later'

@@ -4,7 +4,6 @@ import 'react-toastify/dist/ReactToastify.css'
 import { MainLayout, LoginLayout, UsersLayout, LogOut } from './layouts'
 import { MainPage } from './components/pages'
 import { ToastContainer } from 'react-toastify'
-import AuthProvider from './hooks/useAuth'
 import ProtectedRoutes from './components/common/ProtectedRoutes'
 import AppLoader from './components/UI/hoc/AppLoader'
 import { history } from './utils/history'
@@ -16,33 +15,31 @@ function App() {
     return (
         <>
             <AppLoader>
-                <AuthProvider>
-                    <Routes>
+                <Routes>
+                    <Route
+                        path='/'
+                        element={<MainLayout />}
+                    >
                         <Route
-                            path='/'
-                            element={<MainLayout />}
-                        >
+                            index
+                            element={<MainPage />}
+                        />
+                        <Route
+                            path='login/:type?'
+                            element={<LoginLayout />}
+                        />
+                        <Route element={<ProtectedRoutes />}>
                             <Route
-                                index
-                                element={<MainPage />}
-                            />
-                            <Route
-                                path='login/:type?'
-                                element={<LoginLayout />}
-                            />
-                            <Route element={<ProtectedRoutes />}>
-                                <Route
-                                    path='users/:userId?/:edit?'
-                                    element={<UsersLayout />}
-                                />
-                            </Route>
-                            <Route
-                                path='logout'
-                                element={<LogOut />}
+                                path='users/:userId?/:edit?'
+                                element={<UsersLayout />}
                             />
                         </Route>
-                    </Routes>
-                </AuthProvider>
+                        <Route
+                            path='logout'
+                            element={<LogOut />}
+                        />
+                    </Route>
+                </Routes>
             </AppLoader>
             <ToastContainer />
         </>
