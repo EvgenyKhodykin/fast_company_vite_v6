@@ -2,15 +2,16 @@ import { React, useEffect, useState } from 'react'
 import TextField from '../common/form/TextField'
 import validator from '../../utils/validator'
 import CheckBoxField from '../common/form/CheckBoxField'
-import { useLocation, useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import { signIn } from '../../store/users'
+import { useLocation } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { getAuthError, signIn } from '../../store/users'
 
 function LoginForm() {
     const dispatch = useDispatch()
     const [data, setData] = useState({ email: '', password: '', stayOn: false })
+    const loginError = useSelector(getAuthError())
+    console.log(loginError)
     const [errors, setErrors] = useState({})
-    const navigate = useNavigate()
     const location = useLocation()
     const fromPage = location.state?.from.pathname || '/'
 
@@ -38,20 +39,20 @@ function LoginForm() {
         validate()
     }, [data])
 
-    const validate = () => {
+    function validate() {
         const errors = validator(data, validatorConfig)
         setErrors(errors)
         return Object.keys(errors).length === 0
     }
 
-    const isValid = Object.keys(errors).length === 0
+    let isValid = true
+    if (Object.keys(errors).length === 0 && loginError === null) isValid = false
 
     const handleSubmit = event => {
         event.preventDefault()
         const isValid = validate()
         if (!isValid) return
-        dispatch(signIn(data))
-        navigate(fromPage)
+        dispatch(signIn(data, fromPage))
     }
 
     return (
@@ -78,8 +79,10 @@ function LoginForm() {
             >
                 Stay logged in
             </CheckBoxField>
+            {loginError && <p className='text-danger'>{loginError}</p>}
+
             <button
-                disabled={!isValid}
+                disabled={isValid}
                 className='btn btn-primary w-100 mx-auto'
             >
                 Log In

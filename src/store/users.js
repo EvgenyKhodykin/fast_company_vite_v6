@@ -3,6 +3,8 @@ import userService from '../services/user.service'
 import authService from '../services/auth.service'
 import localStorageService from '../services/localStorage.service'
 import getRandomInt from '../utils/getRandomInt'
+import generateAuthError from '../utils/generateAuthError'
+import { history } from '../utils/history'
 
 const initialState = localStorageService.getAccessToken()
     ? {
@@ -62,6 +64,9 @@ const usersSlice = createSlice({
         },
         authRequestFailed(state, action) {
             state.error = action.payload
+        },
+        authRequested(state) {
+            state.error = null
         }
     }
 })
@@ -85,15 +90,20 @@ const userUpdateRequested = createAction('users/userUpdateRequested')
 const userUpdateFailed = createAction('users/userUpdateFailed')
 
 export const signIn =
-    ({ email, password }) =>
+    ({ email, password }, fromPage) =>
     async dispatch => {
         dispatch(authRequested())
         try {
             const data = await authService.logIn({ email, password })
             localStorageService.setTokens(data)
             dispatch(authRequestSuccess({ userId: data.localId }))
+            history.navigate(fromPage)
         } catch (error) {
-            dispatch(authRequestFailed(error.message))
+            const { code, message } = error.response.data.error
+            if (code === 400) {
+                const errorMessage = generateAuthError(message)
+                dispatch(authRequestFailed(errorMessage))
+            } else dispatch(authRequestFailed(error.message))
         }
     }
 
@@ -141,10 +151,10 @@ function createUser(payload) {
     }
 }
 
-export const updateCurrentUser = data => async dispatch => {
+export const updateCurrentUser = payload => async dispatch => {
     dispatch(userUpdateRequested())
     try {
-        const { content } = await userService.updateCurrentUser(data)
+        const { content } = await userService.updateCurrentUser(payload)
         dispatch(userUpdated(content))
     } catch (error) {
         dispatch(userUpdateFailed(error.message))
@@ -179,5 +189,6 @@ export const getIsLoggedIn = () => state => state.users.isLoggedIn
 export const getDataStatus = () => state => state.users.dataLoaded
 export const getCurrentUserId = () => state => state.users.auth.userId
 export const getUsersLoadingStatus = () => state => state.users.isLoading
+export const getAuthError = () => state => state.users.error
 
 export default usersReducer
