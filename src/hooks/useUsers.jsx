@@ -2,8 +2,9 @@ import React, { useContext, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import userService from '../services/user.service'
 import { toast } from 'react-toastify'
-import { useAuth } from './useAuth'
 import Loading from '../components/UI/Loading'
+import { useSelector } from 'react-redux'
+import { getCurrentUser } from '../store/users'
 
 const UserContext = React.createContext()
 
@@ -15,7 +16,7 @@ function UserProvider({ children }) {
     const [users, setUsers] = useState([])
     const [isLoading, setLoading] = useState(true)
     const [error, setError] = useState(null)
-    const { currentUser } = useAuth()
+    const currentUser = useSelector(getCurrentUser())
 
     useEffect(() => {
         getUsers()

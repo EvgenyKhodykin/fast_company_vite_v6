@@ -10,6 +10,7 @@ import { useAuth } from '../../hooks/useAuth'
 import { useSelector } from 'react-redux'
 import { getQualities, getQualitiesLoadingStatus } from '../../store/qualities'
 import { getProfessions, getProfessionsLoadingStatus } from '../../store/professions'
+import { getCurrentUser } from '../../store/users'
 
 export function EditUserPage() {
     const professions = useSelector(getProfessions())
@@ -17,7 +18,8 @@ export function EditUserPage() {
     const professionsLoading = useSelector(getProfessionsLoadingStatus())
     const qualitiesLoading = useSelector(getQualitiesLoadingStatus())
 
-    const { currentUser, updateCurrentUser } = useAuth()
+    const { updateCurrentUser } = useAuth()
+    const currentUser = useSelector(getCurrentUser())
     const [user, setUser] = useState(currentUser)
     const [errors, setErrors] = useState({})
     const navigate = useNavigate()

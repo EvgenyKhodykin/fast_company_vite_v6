@@ -6,7 +6,6 @@ import { useSelector } from 'react-redux'
 
 function NavBar() {
     const isLoggedIn = useSelector(getIsLoggedIn())
-    console.log(isLoggedIn)
 
     return (
         <header>
