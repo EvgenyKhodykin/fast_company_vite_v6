@@ -6,15 +6,17 @@ import CommentsList from './CommentsList'
 import { useDispatch, useSelector } from 'react-redux'
 import {
     createComment,
-    getComments,
-    getCommentsLoadingStatus,
     loadCommentsList,
     removeComment
-} from '../../../store/comments'
+} from '../../../store/comments/slice'
 import Loading from '../../UI/Loading'
 import { useParams } from 'react-router-dom'
 import { nanoid } from 'nanoid'
 import { getCurrentUserId } from '../../../store/users'
+import {
+    getComments,
+    getCommentsLoadingStatus
+} from '../../../store/comments/selectors'
 
 function CommentsColumn({ users }) {
     const dispatch = useDispatch()

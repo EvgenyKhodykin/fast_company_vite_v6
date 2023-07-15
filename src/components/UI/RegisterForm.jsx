@@ -7,7 +7,7 @@ import MultiSelectField from '../common/form/MultiSelectField'
 import CheckBoxField from '../common/form/CheckBoxField'
 import { useDispatch, useSelector } from 'react-redux'
 import { getQualities } from '../../store/qualities'
-import { getProfessions } from '../../store/professions'
+import { getProfessions } from '../../store/professions/selectors'
 import { signUp } from '../../store/users'
 
 function RegisterForm() {

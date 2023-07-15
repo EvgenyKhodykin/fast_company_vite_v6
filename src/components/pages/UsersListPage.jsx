@@ -8,7 +8,10 @@ import SearchStatus from '../UI/SearchStatus'
 import UserTable from '../UI/UsersTable'
 import Loading from '../UI/Loading'
 import { useSelector } from 'react-redux'
-import { getProfessions, getProfessionsLoadingStatus } from '../../store/professions'
+import {
+    getProfessions,
+    getProfessionsLoadingStatus
+} from '../../store/professions/selectors'
 import { getCurrentUserId, getUsersList } from '../../store/users'
 
 export function UsersListPage() {

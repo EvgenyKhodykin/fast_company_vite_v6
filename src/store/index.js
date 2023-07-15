@@ -1,8 +1,8 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import qualitiesReducer from './qualities'
-import professionsReducer from './professions'
+import professionsReducer from './professions/slice'
 import usersReducer from './users'
-import commentsReducer from './comments'
+import commentsReducer from './comments/slice'
 
 const rootReducer = combineReducers({
     qualities: qualitiesReducer,

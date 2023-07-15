@@ -7,7 +7,7 @@ import {
 } from '../../../store/users'
 import PropTypes from 'prop-types'
 import { loadQualitiesList } from '../../../store/qualities'
-import { loadProfessionsList } from '../../../store/professions'
+import { loadProfessionsList } from '../../../store/professions/slice'
 import Loading from '../Loading'
 
 function AppLoader({ children }) {

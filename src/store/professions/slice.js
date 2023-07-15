@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
-import professionService from '../services/profession.service'
-import isOutdated from '../utils/isOutdated'
+import professionService from '../../services/profession.service'
+import isOutdated from '../../utils/isOutdated'
 
 const professionsSlice = createSlice({
     name: 'professions',
@@ -42,8 +42,5 @@ export const loadProfessionsList = async (dispatch, getState) => {
         }
     }
 }
-
-export const getProfessions = state => state.professions.entities
-export const getProfessionsLoadingStatus = state => state.professions.isLoading
 
 export default professionsReducer

@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
-import { getProfessionsLoadingStatus } from '../../store/professions'
+import { getProfessionsLoadingStatus } from '../../store/professions/selectors'
 
 function Profession({ id }) {
     const professionsLoading = useSelector(getProfessionsLoadingStatus)

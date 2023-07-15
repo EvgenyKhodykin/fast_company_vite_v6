@@ -8,7 +8,10 @@ import Loading from '../UI/Loading'
 import validator from '../../utils/validator'
 import { useDispatch, useSelector } from 'react-redux'
 import { getQualities, getQualitiesLoadingStatus } from '../../store/qualities'
-import { getProfessions, getProfessionsLoadingStatus } from '../../store/professions'
+import {
+    getProfessions,
+    getProfessionsLoadingStatus
+} from '../../store/professions/selectors'
 import { getCurrentUser, updateCurrentUser } from '../../store/users'
 
 export function EditUserPage() {

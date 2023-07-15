@@ -1,5 +1,5 @@
 import { createAction, createSlice } from '@reduxjs/toolkit'
-import commentService from '../services/comment.service'
+import commentService from '../../services/comment.service'
 
 const commentsSlice = createSlice({
     name: 'comments',
@@ -76,8 +76,5 @@ export const removeComment = id => async dispatch => {
         dispatch(commentRemoveFailed(error.message))
     }
 }
-
-export const getComments = state => state.comments.entities
-export const getCommentsLoadingStatus = state => state.comments.isLoading
 
 export default commentsReducer
