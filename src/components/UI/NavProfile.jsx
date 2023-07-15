@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { getCurrentUser } from '../../store/users'
+import { getCurrentUser } from '../../store/users/selectors'
 import Loading from './Loading'
 
 function NavProfile() {

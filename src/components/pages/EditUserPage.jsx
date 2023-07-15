@@ -15,7 +15,8 @@ import {
     getProfessions,
     getProfessionsLoadingStatus
 } from '../../store/professions/selectors'
-import { getCurrentUser, updateCurrentUser } from '../../store/users'
+import { updateCurrentUser } from '../../store/users/slice'
+import { getCurrentUser } from '../../store/users/selectors'
 
 export function EditUserPage() {
     const professions = useSelector(getProfessions)

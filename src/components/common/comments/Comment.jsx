@@ -2,7 +2,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import getCommentDate from '../../../utils/getCommentDate'
-import { getCurrentUserId, getUserById } from '../../../store/users'
+import { getCurrentUserId, getUserById } from '../../../store/users/selectors'
 import { useSelector } from 'react-redux'
 
 function Comment({ _id, created_at, content, userId, onRemove }) {

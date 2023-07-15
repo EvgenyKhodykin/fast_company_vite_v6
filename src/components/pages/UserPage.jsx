@@ -6,7 +6,7 @@ import QualitiesCard from '../UI/QualitiesCard'
 import MeetingsCard from '../UI/MeetingsCard'
 import CommentsColumn from '../common/comments/CommentsColumn'
 import { useSelector } from 'react-redux'
-import { getUserById } from '../../store/users'
+import { getUserById } from '../../store/users/selectors'
 
 export function UserPage({ id }) {
     const currentUser = useSelector(getUserById(id))

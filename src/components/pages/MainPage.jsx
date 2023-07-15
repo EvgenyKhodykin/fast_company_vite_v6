@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { getCurrentUser, getIsLoggedIn } from '../../store/users'
+import { getCurrentUser, getIsLoggedIn } from '../../store/users/selectors'
 
 export function MainPage() {
     const isLoggedIn = useSelector(getIsLoggedIn)

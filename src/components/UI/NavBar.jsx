@@ -1,7 +1,7 @@
 import { React } from 'react'
 import { NavLink } from 'react-router-dom'
 import NavProfile from './NavProfile'
-import { getIsLoggedIn } from '../../store/users'
+import { getIsLoggedIn } from '../../store/users/selectors'
 import { useSelector } from 'react-redux'
 
 function NavBar() {

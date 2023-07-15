@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { getCurrentUserId } from '../../store/users'
+import { getCurrentUserId } from '../../store/users/selectors'
 
 function UserCard({ name, profession, rate, _id, image }) {
     const currentUserId = useSelector(getCurrentUserId)

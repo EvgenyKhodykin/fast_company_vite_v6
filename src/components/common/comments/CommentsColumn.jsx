@@ -12,7 +12,7 @@ import {
 import Loading from '../../UI/Loading'
 import { useParams } from 'react-router-dom'
 import { nanoid } from 'nanoid'
-import { getCurrentUserId } from '../../../store/users'
+import { getCurrentUserId } from '../../../store/users/selectors'
 import {
     getComments,
     getCommentsLoadingStatus

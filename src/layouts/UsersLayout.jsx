@@ -2,7 +2,7 @@ import React from 'react'
 import { Navigate, useParams } from 'react-router-dom'
 import { UsersListPage, UserPage, EditUserPage } from '../components/pages'
 import { useSelector } from 'react-redux'
-import { getCurrentUserId } from '../store/users'
+import { getCurrentUserId } from '../store/users/selectors'
 import UsersLoader from '../components/UI/hoc/UsersLoader'
 
 export function UsersLayout() {

@@ -8,7 +8,7 @@ import CheckBoxField from '../common/form/CheckBoxField'
 import { useDispatch, useSelector } from 'react-redux'
 import { getQualities } from '../../store/qualities/selectors'
 import { getProfessions } from '../../store/professions/selectors'
-import { signUp } from '../../store/users'
+import { signUp } from '../../store/users/slice'
 
 function RegisterForm() {
     const dispatch = useDispatch()

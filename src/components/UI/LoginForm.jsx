@@ -4,7 +4,8 @@ import validator from '../../utils/validator'
 import CheckBoxField from '../common/form/CheckBoxField'
 import { useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAuthError, signIn } from '../../store/users'
+import { signIn } from '../../store/users/slice'
+import { getAuthError } from '../../store/users/selectors'
 
 function LoginForm() {
     const dispatch = useDispatch()

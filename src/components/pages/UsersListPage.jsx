@@ -12,7 +12,7 @@ import {
     getProfessions,
     getProfessionsLoadingStatus
 } from '../../store/professions/selectors'
-import { getCurrentUserId, getUsersList } from '../../store/users'
+import { getCurrentUserId, getUsersList } from '../../store/users/selectors'
 
 export function UsersListPage() {
     const users = useSelector(getUsersList)

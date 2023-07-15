@@ -2,7 +2,7 @@ import React from 'react'
 import { Navigate, Outlet, useLocation } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
-import { getIsLoggedIn } from '../../store/users'
+import { getIsLoggedIn } from '../../store/users/selectors'
 
 function ProtectedRoutes() {
     const isLoggedIn = useSelector(getIsLoggedIn)
