@@ -18,7 +18,7 @@ export function EditUserPage() {
     const qualitiesLoading = useSelector(getQualitiesLoadingStatus)
 
     const dispatch = useDispatch()
-    const currentUser = useSelector(getCurrentUser())
+    const currentUser = useSelector(getCurrentUser)
     const [user, setUser] = useState(currentUser)
     const [errors, setErrors] = useState({})
     const navigate = useNavigate()

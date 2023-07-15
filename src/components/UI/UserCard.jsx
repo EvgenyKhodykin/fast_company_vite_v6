@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 import { getCurrentUserId } from '../../store/users'
 
 function UserCard({ name, profession, rate, _id, image }) {
-    const currentUserId = useSelector(getCurrentUserId())
+    const currentUserId = useSelector(getCurrentUserId)
 
     return (
         <div className='card mb-3'>

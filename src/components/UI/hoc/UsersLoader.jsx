@@ -5,11 +5,11 @@ import PropTypes from 'prop-types'
 import Loading from '../Loading'
 
 function UsersLoader({ children }) {
-    const dataStatus = useSelector(getDataStatus())
+    const dataStatus = useSelector(getDataStatus)
     const dispatch = useDispatch()
 
     useEffect(() => {
-        if (!dataStatus) dispatch(loadUsersList())
+        if (!dataStatus) dispatch(loadUsersList)
     }, [])
 
     if (!dataStatus) return <Loading />

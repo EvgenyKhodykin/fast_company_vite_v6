@@ -12,8 +12,8 @@ import { getProfessions, getProfessionsLoadingStatus } from '../../store/profess
 import { getCurrentUserId, getUsersList } from '../../store/users'
 
 export function UsersListPage() {
-    const users = useSelector(getUsersList())
-    const currentUserId = useSelector(getCurrentUserId())
+    const users = useSelector(getUsersList)
+    const currentUserId = useSelector(getCurrentUserId)
 
     const professions = useSelector(getProfessions)
     const professionsLoading = useSelector(getProfessionsLoadingStatus)

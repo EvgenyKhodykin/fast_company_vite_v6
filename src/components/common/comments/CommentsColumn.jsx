@@ -17,11 +17,11 @@ import { nanoid } from 'nanoid'
 import { getCurrentUserId } from '../../../store/users'
 
 function CommentsColumn({ users }) {
-    const { userId } = useParams()
-    const currentUserId = useSelector(getCurrentUserId())
     const dispatch = useDispatch()
-    const isLoading = useSelector(getCommentsLoadingStatus())
-    const comments = useSelector(getComments())
+    const { userId } = useParams()
+    const currentUserId = useSelector(getCurrentUserId)
+    const isLoading = useSelector(getCommentsLoadingStatus)
+    const comments = useSelector(getComments)
     const sortedComments = orderBy(comments, ['created_at'], ['desc'])
 
     useEffect(() => {

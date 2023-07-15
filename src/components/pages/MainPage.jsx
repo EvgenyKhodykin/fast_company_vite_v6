@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux'
 import { getCurrentUser, getIsLoggedIn } from '../../store/users'
 
 export function MainPage() {
-    const isLoggedIn = useSelector(getIsLoggedIn())
-    const currentUser = useSelector(getCurrentUser())
+    const isLoggedIn = useSelector(getIsLoggedIn)
+    const currentUser = useSelector(getCurrentUser)
 
     if (isLoggedIn) {
         return (

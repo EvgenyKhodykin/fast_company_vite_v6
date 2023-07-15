@@ -7,7 +7,7 @@ import UsersLoader from '../components/UI/hoc/UsersLoader'
 
 export function UsersLayout() {
     const { userId, edit } = useParams()
-    const currentUserId = useSelector(getCurrentUserId())
+    const currentUserId = useSelector(getCurrentUserId)
 
     return (
         <UsersLoader>

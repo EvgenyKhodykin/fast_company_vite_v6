@@ -135,7 +135,7 @@ export const signUp =
         }
     }
 
-export const userLogOut = () => dispatch => {
+export const userLogOut = dispatch => {
     localStorageService.removeAuthData()
     dispatch(userLoggedOut())
 }
@@ -162,7 +162,7 @@ export const updateCurrentUser = payload => async dispatch => {
     }
 }
 
-export const loadUsersList = () => async dispatch => {
+export const loadUsersList = async dispatch => {
     dispatch(usersRequested())
     try {
         const { content } = await userService.fetchAll()
@@ -172,9 +172,9 @@ export const loadUsersList = () => async dispatch => {
     }
 }
 
-export const getUsersList = () => state => state.users.entities
+export const getUsersList = state => state.users.entities
 
-export const getCurrentUser = () => state => {
+export const getCurrentUser = state => {
     return state.users.entities
         ? state.users.entities.find(user => user._id === state.users.auth.userId)
         : null
@@ -186,10 +186,10 @@ export const getUserById = userId => state => {
     }
 }
 
-export const getIsLoggedIn = () => state => state.users.isLoggedIn
-export const getDataStatus = () => state => state.users.dataLoaded
-export const getCurrentUserId = () => state => state.users.auth.userId
-export const getUsersLoadingStatus = () => state => state.users.isLoading
-export const getAuthError = () => state => state.users.error
+export const getIsLoggedIn = state => state.users.isLoggedIn
+export const getDataStatus = state => state.users.dataLoaded
+export const getCurrentUserId = state => state.users.auth.userId
+export const getUsersLoadingStatus = state => state.users.isLoading
+export const getAuthError = state => state.users.error
 
 export default usersReducer

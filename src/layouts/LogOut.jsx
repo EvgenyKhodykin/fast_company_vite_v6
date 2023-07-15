@@ -7,7 +7,7 @@ export function LogOut() {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(userLogOut())
+        dispatch(userLogOut)
     }, [])
 
     return <Navigate to={'/'} />

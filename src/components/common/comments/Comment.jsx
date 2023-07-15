@@ -6,7 +6,7 @@ import { getCurrentUserId, getUserById } from '../../../store/users'
 import { useSelector } from 'react-redux'
 
 function Comment({ _id, created_at, content, userId, onRemove }) {
-    const currentUserId = useSelector(getCurrentUserId())
+    const currentUserId = useSelector(getCurrentUserId)
     const commentAuthor = useSelector(getUserById(userId))
 
     return (

@@ -12,14 +12,14 @@ import Loading from '../Loading'
 
 function AppLoader({ children }) {
     const dispatch = useDispatch()
-    const isLoggedIn = useSelector(getIsLoggedIn())
-    const usersStatusLoading = useSelector(getUsersLoadingStatus())
+    const isLoggedIn = useSelector(getIsLoggedIn)
+    const usersStatusLoading = useSelector(getUsersLoadingStatus)
 
     useEffect(() => {
         dispatch(loadQualitiesList)
         dispatch(loadProfessionsList)
         if (isLoggedIn) {
-            dispatch(loadUsersList())
+            dispatch(loadUsersList)
         }
     }, [isLoggedIn])
 

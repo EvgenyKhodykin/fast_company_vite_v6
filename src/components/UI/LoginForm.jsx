@@ -9,7 +9,7 @@ import { getAuthError, signIn } from '../../store/users'
 function LoginForm() {
     const dispatch = useDispatch()
     const [data, setData] = useState({ email: '', password: '', stayOn: false })
-    const loginError = useSelector(getAuthError())
+    const loginError = useSelector(getAuthError)
     const [errors, setErrors] = useState({})
     const location = useLocation()
     const fromPage = location.state?.from.pathname || '/'

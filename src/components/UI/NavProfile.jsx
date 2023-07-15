@@ -5,7 +5,7 @@ import { getCurrentUser } from '../../store/users'
 import Loading from './Loading'
 
 function NavProfile() {
-    const currentUser = useSelector(getCurrentUser())
+    const currentUser = useSelector(getCurrentUser)
     const [isOpen, setOpen] = useState(false)
 
     const toggleMenu = () => {

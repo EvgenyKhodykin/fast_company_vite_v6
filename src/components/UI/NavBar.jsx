@@ -5,7 +5,7 @@ import { getIsLoggedIn } from '../../store/users'
 import { useSelector } from 'react-redux'
 
 function NavBar() {
-    const isLoggedIn = useSelector(getIsLoggedIn())
+    const isLoggedIn = useSelector(getIsLoggedIn)
 
     return (
         <header>
