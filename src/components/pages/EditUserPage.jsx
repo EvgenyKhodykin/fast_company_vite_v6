@@ -7,7 +7,10 @@ import MultiSelectField from '../common/form/MultiSelectField'
 import Loading from '../UI/Loading'
 import validator from '../../utils/validator'
 import { useDispatch, useSelector } from 'react-redux'
-import { getQualities, getQualitiesLoadingStatus } from '../../store/qualities'
+import {
+    getQualities,
+    getQualitiesLoadingStatus
+} from '../../store/qualities/selectors'
 import {
     getProfessions,
     getProfessionsLoadingStatus

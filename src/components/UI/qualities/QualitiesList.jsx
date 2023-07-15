@@ -2,11 +2,11 @@ import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import Qualitie from './Qualitie'
 import { useDispatch, useSelector } from 'react-redux'
+import { loadQualitiesList } from '../../../store/qualities/slice'
 import {
     getQualities,
-    getQualitiesLoadingStatus,
-    loadQualitiesList
-} from '../../../store/qualities'
+    getQualitiesLoadingStatus
+} from '../../../store/qualities/selectors'
 
 export function QualitiesList({ qualities }) {
     const dispatch = useDispatch()

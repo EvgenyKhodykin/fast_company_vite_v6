@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import qualitiesReducer from './qualities'
+import qualitiesReducer from './qualities/slice'
 import professionsReducer from './professions/slice'
 import usersReducer from './users'
 import commentsReducer from './comments/slice'

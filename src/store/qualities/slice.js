@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
-import qualityService from '../services/quality.service'
-import isOutdated from '../utils/isOutdated'
+import qualityService from '../../services/quality.service'
+import isOutdated from '../../utils/isOutdated'
 
 const qualitiesSlice = createSlice({
     name: 'qualities',
@@ -41,8 +41,5 @@ export const loadQualitiesList = async (dispatch, getState) => {
         }
     }
 }
-
-export const getQualities = state => state.qualities.entities
-export const getQualitiesLoadingStatus = state => state.qualities.isLoading
 
 export default qualitiesReducer
