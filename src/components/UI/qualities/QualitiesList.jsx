@@ -10,11 +10,11 @@ import {
 
 export function QualitiesList({ qualities }) {
     const dispatch = useDispatch()
-    const allQualities = useSelector(getQualities())
-    const isLoading = useSelector(getQualitiesLoadingStatus())
+    const allQualities = useSelector(getQualities)
+    const isLoading = useSelector(getQualitiesLoadingStatus)
 
     useEffect(() => {
-        dispatch(loadQualitiesList())
+        dispatch(loadQualitiesList)
     }, [])
 
     if (!isLoading && allQualities.length > 0) {

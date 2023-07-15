@@ -16,7 +16,7 @@ function AppLoader({ children }) {
     const usersStatusLoading = useSelector(getUsersLoadingStatus())
 
     useEffect(() => {
-        dispatch(loadQualitiesList())
+        dispatch(loadQualitiesList)
         dispatch(loadProfessionsList())
         if (isLoggedIn) {
             dispatch(loadUsersList())
