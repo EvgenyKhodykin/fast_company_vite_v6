@@ -23,13 +23,13 @@ function RegisterForm() {
         licence: false
     })
     const [errors, setErrors] = useState({})
-    const professions = useSelector(getProfessions())
+    const professions = useSelector(getProfessions)
     const professionsList = professions.map(profession => ({
         label: profession.name,
         value: profession._id
     }))
 
-    const qualities = useSelector(getQualities())
+    const qualities = useSelector(getQualities)
     const qualitiesList = qualities.map(quality => ({
         label: quality.name,
         value: quality._id

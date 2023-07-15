@@ -17,7 +17,7 @@ function AppLoader({ children }) {
 
     useEffect(() => {
         dispatch(loadQualitiesList)
-        dispatch(loadProfessionsList())
+        dispatch(loadProfessionsList)
         if (isLoggedIn) {
             dispatch(loadUsersList())
         }

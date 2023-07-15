@@ -12,10 +12,10 @@ import { getProfessions, getProfessionsLoadingStatus } from '../../store/profess
 import { getCurrentUser, updateCurrentUser } from '../../store/users'
 
 export function EditUserPage() {
-    const professions = useSelector(getProfessions())
-    const qualities = useSelector(getQualities())
-    const professionsLoading = useSelector(getProfessionsLoadingStatus())
-    const qualitiesLoading = useSelector(getQualitiesLoadingStatus())
+    const professions = useSelector(getProfessions)
+    const qualities = useSelector(getQualities)
+    const professionsLoading = useSelector(getProfessionsLoadingStatus)
+    const qualitiesLoading = useSelector(getQualitiesLoadingStatus)
 
     const dispatch = useDispatch()
     const currentUser = useSelector(getCurrentUser())

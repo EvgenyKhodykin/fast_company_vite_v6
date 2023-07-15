@@ -30,7 +30,7 @@ const { actions, reducer: professionsReducer } = professionsSlice
 const { professionsRequested, professionsRecieved, professionsRequestFailed } =
     actions
 
-export const loadProfessionsList = () => async (dispatch, getState) => {
+export const loadProfessionsList = async (dispatch, getState) => {
     const { lastFetch } = getState().professions
     if (isOutdated(lastFetch)) {
         dispatch(professionsRequested())
@@ -43,7 +43,7 @@ export const loadProfessionsList = () => async (dispatch, getState) => {
     }
 }
 
-export const getProfessions = () => state => state.professions.entities
-export const getProfessionsLoadingStatus = () => state => state.professions.isLoading
+export const getProfessions = state => state.professions.entities
+export const getProfessionsLoadingStatus = state => state.professions.isLoading
 
 export default professionsReducer
