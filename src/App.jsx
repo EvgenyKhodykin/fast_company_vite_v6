@@ -1,17 +1,13 @@
 import { React } from 'react'
-import { Routes, Route, useNavigate, useLocation, Navigate } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { MainLayout, LoginLayout, UsersLayout, LogOut } from './layouts'
 import { MainPage } from './components/pages'
-import { ToastContainer } from 'react-toastify'
 import ProtectedRoutes from './components/common/ProtectedRoutes'
 import AppLoader from './components/UI/hoc/AppLoader'
-import { history } from './utils/history'
 
 function App() {
-    history.navigate = useNavigate()
-    history.location = useLocation()
-
     return (
         <>
             <AppLoader>

@@ -4,7 +4,6 @@ import authService from '../../services/auth.service'
 import localStorageService from '../../services/localStorage.service'
 import getRandomInt from '../../utils/getRandomInt'
 import generateAuthError from '../../utils/generateAuthError'
-import { history } from '../../utils/history'
 
 const initialState = localStorageService.getAccessToken()
     ? {
@@ -47,9 +46,7 @@ const usersSlice = createSlice({
             state.entities.push(action.payload)
         },
         userUpdated(state, action) {
-            const index = state.entities.findIndex(
-                item => item._id === action.payload._id
-            )
+            const index = state.entities.findIndex(item => item._id === action.payload._id)
             state.entities[index] = action.payload
         },
         userLoggedOut(state) {
@@ -90,14 +87,13 @@ const userUpdateRequested = createAction('users/userUpdateRequested')
 const userUpdateFailed = createAction('users/userUpdateFailed')
 
 export const signIn =
-    ({ email, password }, fromPage) =>
+    ({ email, password }) =>
     async dispatch => {
         dispatch(authRequested())
         try {
             const data = await authService.logIn({ email, password })
             localStorageService.setTokens(data)
             dispatch(authRequestSuccess({ userId: data.localId }))
-            history.navigate(fromPage)
         } catch (error) {
             const { code, message } = error.response.data.error
             if (code === 400) {
@@ -121,15 +117,12 @@ export const signUp =
                     email,
                     rate: getRandomInt(1, 5),
                     completedMeetings: getRandomInt(0, 200),
-                    image: `https://avatars.dicebear.com/api/avataaars/${(
-                        Math.random() + 1
-                    )
+                    image: `https://avatars.dicebear.com/api/avataaars/${(Math.random() + 1)
                         .toString(36)
                         .substring(7)}.svg`,
                     ...rest
                 })
             )
-            history.navigate('/')
         } catch (error) {
             dispatch(authRequestFailed(error.message))
         }

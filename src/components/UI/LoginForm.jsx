@@ -2,10 +2,10 @@ import { React, useEffect, useState } from 'react'
 import TextField from '../common/form/TextField'
 import validator from '../../utils/validator'
 import CheckBoxField from '../common/form/CheckBoxField'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { signIn } from '../../store/users/slice'
-import { getAuthError } from '../../store/users/selectors'
+import { getAuthError, getIsLoggedIn } from '../../store/users/selectors'
 
 function LoginForm() {
     const dispatch = useDispatch()
@@ -14,6 +14,8 @@ function LoginForm() {
     const [errors, setErrors] = useState({})
     const location = useLocation()
     const fromPage = location.state?.from.pathname || '/'
+    const navigate = useNavigate()
+    const isLoggedIn = useSelector(getIsLoggedIn)
 
     const handleChange = target => {
         setData(prevState => ({
@@ -37,7 +39,8 @@ function LoginForm() {
 
     useEffect(() => {
         validate()
-    }, [data])
+        if (isLoggedIn) navigate(fromPage)
+    }, [data, isLoggedIn, navigate])
 
     function validate() {
         const errors = validator(data, validatorConfig)
@@ -51,7 +54,7 @@ function LoginForm() {
         event.preventDefault()
         const isValid = validate()
         if (!isValid) return
-        dispatch(signIn(data, fromPage))
+        dispatch(signIn(data))
     }
 
     return (
@@ -71,19 +74,12 @@ function LoginForm() {
                 onChange={handleChange}
                 error={errors.password}
             />
-            <CheckBoxField
-                value={data.stayOn}
-                onChange={handleChange}
-                name='stayOn'
-            >
+            <CheckBoxField value={data.stayOn} onChange={handleChange} name='stayOn'>
                 Stay logged in
             </CheckBoxField>
             {loginError && <p className='text-danger'>{loginError}</p>}
 
-            <button
-                disabled={!isValid}
-                className='btn btn-primary w-100 mx-auto'
-            >
+            <button disabled={!isValid} className='btn btn-primary w-100 mx-auto'>
                 Log In
             </button>
         </form>

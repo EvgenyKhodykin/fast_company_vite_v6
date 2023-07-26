@@ -9,9 +9,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getQualities } from '../../store/qualities/selectors'
 import { getProfessions } from '../../store/professions/selectors'
 import { signUp } from '../../store/users/slice'
+import { useNavigate } from 'react-router-dom'
+import { getIsLoggedIn } from '../../store/users/selectors'
 
 function RegisterForm() {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const isLoggedIn = useSelector(getIsLoggedIn)
 
     const [data, setData] = useState({
         email: '',
@@ -89,7 +93,9 @@ function RegisterForm() {
 
     useEffect(() => {
         validate()
-    }, [data])
+        if (isLoggedIn) navigate('/')
+    }, [data, isLoggedIn, navigate])
+
     const validate = () => {
         const errors = validator(data, validatorConfig)
         setErrors(errors)
@@ -166,11 +172,7 @@ function RegisterForm() {
             >
                 Confirm <a>license agreement</a>
             </CheckBoxField>
-            <button
-                type='submit'
-                disabled={!isValid}
-                className='btn btn-primary w-100 mx-auto'
-            >
+            <button type='submit' disabled={!isValid} className='btn btn-primary w-100 mx-auto'>
                 Sign Up
             </button>
         </form>
