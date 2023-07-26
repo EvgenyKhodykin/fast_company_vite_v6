@@ -1,4 +1,5 @@
 import { React, useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import TextField from '../common/form/TextField'
 import validator from '../../utils/validator'
 import SelectField from '../common/form/SelectField'
@@ -9,7 +10,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getQualities } from '../../store/qualities/selectors'
 import { getProfessions } from '../../store/professions/selectors'
 import { signUp } from '../../store/users/slice'
-import { useNavigate } from 'react-router-dom'
 import { getIsLoggedIn } from '../../store/users/selectors'
 
 function RegisterForm() {
@@ -94,7 +94,7 @@ function RegisterForm() {
     useEffect(() => {
         validate()
         if (isLoggedIn) navigate('/')
-    }, [data, isLoggedIn, navigate])
+    }, [data, isLoggedIn])
 
     const validate = () => {
         const errors = validator(data, validatorConfig)

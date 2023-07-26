@@ -6,16 +6,16 @@ export function MainPage() {
     const isLoggedIn = useSelector(getIsLoggedIn)
     const currentUser = useSelector(getCurrentUser)
 
-    if (isLoggedIn) {
+    if (isLoggedIn && currentUser) {
         return (
             <div className='container mt-5'>
-                <h3>Hi, {currentUser.name}! Welcome back &#128578; </h3>
+                <h3>Hi, {currentUser.name}! Welcome to Fast Company! &#128578; </h3>
             </div>
         )
     }
     return (
         <div className='container mt-5'>
-            <h3>Welcome to Fast Company, comrad!</h3>
+            <h3 className='text-danger'>Fast Company Main Page</h3>
         </div>
     )
 }
