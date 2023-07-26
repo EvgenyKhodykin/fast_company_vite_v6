@@ -6,7 +6,6 @@ export function MainLayout() {
     return (
         <>
             <NavBar />
-
             <Outlet />
         </>
     )

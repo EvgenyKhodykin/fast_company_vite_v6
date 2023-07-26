@@ -4,26 +4,30 @@ import { UsersListPage, UserPage, EditUserPage } from '../components/pages'
 import { useSelector } from 'react-redux'
 import { getCurrentUserId } from '../store/users/selectors'
 import UsersLoader from '../components/UI/hoc/UsersLoader'
+import NavBar from '../components/UI/NavBar'
 
 export function UsersLayout() {
     const { userId, edit } = useParams()
     const currentUserId = useSelector(getCurrentUserId)
 
     return (
-        <UsersLoader>
-            {userId ? (
-                edit ? (
-                    userId === currentUserId ? (
-                        <EditUserPage />
+        <>
+            <NavBar />
+            <UsersLoader>
+                {userId ? (
+                    edit ? (
+                        userId === currentUserId ? (
+                            <EditUserPage />
+                        ) : (
+                            <Navigate to={`/users/${currentUserId}/edit`} />
+                        )
                     ) : (
-                        <Navigate to={`/users/${currentUserId}/edit`} />
+                        <UserPage id={userId} />
                     )
                 ) : (
-                    <UserPage id={userId} />
-                )
-            ) : (
-                <UsersListPage />
-            )}
-        </UsersLoader>
+                    <UsersListPage />
+                )}
+            </UsersLoader>
+        </>
     )
 }

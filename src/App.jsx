@@ -1,5 +1,5 @@
 import { React } from 'react'
-import { Routes, Route, useNavigate, useLocation } from 'react-router-dom'
+import { Routes, Route, useNavigate, useLocation, Navigate } from 'react-router-dom'
 import 'react-toastify/dist/ReactToastify.css'
 import { MainLayout, LoginLayout, UsersLayout, LogOut } from './layouts'
 import { MainPage } from './components/pages'
@@ -16,29 +16,15 @@ function App() {
         <>
             <AppLoader>
                 <Routes>
-                    <Route
-                        path='/'
-                        element={<MainLayout />}
-                    >
-                        <Route
-                            index
-                            element={<MainPage />}
-                        />
-                        <Route
-                            path='login/:type?'
-                            element={<LoginLayout />}
-                        />
-                        <Route element={<ProtectedRoutes />}>
-                            <Route
-                                path='users/:userId?/:edit?'
-                                element={<UsersLayout />}
-                            />
-                        </Route>
-                        <Route
-                            path='logout'
-                            element={<LogOut />}
-                        />
+                    <Route path='/' element={<MainLayout />}>
+                        <Route index element={<MainPage />} />
                     </Route>
+                    <Route path='login' element={<LoginLayout />} />
+                    <Route element={<ProtectedRoutes />}>
+                        <Route path='users/:userId?/:edit?' element={<UsersLayout />} />
+                    </Route>
+                    <Route path='logout' element={<LogOut />} />
+                    <Route path='*' element={<Navigate to='/' />} />
                 </Routes>
             </AppLoader>
             <ToastContainer />
