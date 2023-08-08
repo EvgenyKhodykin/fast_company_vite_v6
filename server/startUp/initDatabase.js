@@ -3,7 +3,7 @@ import qualitiesMock from '../mockData/qualities.json' assert { type: 'json' }
 import Profession from '../models/Profession.js'
 import Quality from '../models/Quality.js '
 
-export async function initDatabase() {
+async function initDatabase() {
     const professions = await Profession.find()
     if (professions.length !== professionsMock.length) {
         await createInitialEntity(Profession, professionsMock)
@@ -29,3 +29,5 @@ async function createInitialEntity(Model, data) {
         })
     )
 }
+
+export default initDatabase
