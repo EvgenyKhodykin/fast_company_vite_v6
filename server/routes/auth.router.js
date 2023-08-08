@@ -53,7 +53,53 @@ authRouter.post('/signUp', [
     }
 ])
 
-authRouter.post('/signInWithPassword', async (request, response) => {})
+authRouter.post('/signInWithPassword', [
+    check('email', 'Некорректный email').normalizeEmail().isEmail(),
+    check('password', 'Введите пароль!').exists(),
+    async (request, response) => {
+        try {
+            const errors = validationResult(request)
+            if (!errors.isEmpty()) {
+                return response.status(400).json({
+                    error: {
+                        message: 'INVALID_DATA',
+                        code: 400
+                    }
+                })
+            }
+
+            const { email, password } = request.body
+
+            const existingUser = await User.findOne({ email })
+
+            if (!existingUser) {
+                response.status(400).send({
+                    error: {
+                        message: 'EMAIL_NOT_FOUND',
+                        code: 400
+                    }
+                })
+            }
+
+            const isPasswordEqual = await bcrypt.compare(password, existingUser.password)
+            if (!isPasswordEqual) {
+                response.status(400).send({
+                    error: {
+                        message: 'INVALID_PASSWORD',
+                        code: 400
+                    }
+                })
+            }
+
+            const tokens = tokenService.generate({ _id: existingUser._id })
+            await tokenService.save(existingUser._id, tokens.refreshToken)
+
+            response.status(200).send({ ...tokens, userId: existingUser._id })
+        } catch (error) {
+            response.status(500).json({ message: 'Server error.Try again later...' })
+        }
+    }
+])
 
 authRouter.post('/token', async (request, response) => {})
 
