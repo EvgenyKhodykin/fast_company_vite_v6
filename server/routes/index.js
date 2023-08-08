@@ -1,12 +1,14 @@
 import express from 'express'
-import authRouter from './auth.routes.js'
+import authRouter from './auth.router.js'
+import professionsRouter from './professions.router.js'
+import qualityRouter from './qualities.router.js'
 
 const router = express.Router({ mergeParams: true })
 
 router.use('/auth', authRouter)
-router.use('/comment', authRouter)
-router.use('/quality', authRouter)
-router.use('/profession', authRouter)
-router.use('/user', authRouter)
+router.use('/professions', professionsRouter)
+router.use('/qualities', qualityRouter)
+// router.use('/comments', authRouter)
+// router.use('/users', authRouter)
 
 export default router
