@@ -1,9 +1,10 @@
 import express from 'express'
 import User from '../models/User.js'
+import authMiddleware from '../middleware/auth.middleware.js'
 
 const userRouter = express.Router({ mergeParams: true })
 
-userRouter.patch('/:userId', async (request, response) => {
+userRouter.patch('/:userId', authMiddleware, async (request, response) => {
     try {
         const { userId } = request.params
         if (userId) {
@@ -19,7 +20,7 @@ userRouter.patch('/:userId', async (request, response) => {
     }
 })
 
-userRouter.get('/', async (request, response) => {
+userRouter.get('/', authMiddleware, async (request, response) => {
     try {
         const list = await User.find()
         response.status(200).send(list)
