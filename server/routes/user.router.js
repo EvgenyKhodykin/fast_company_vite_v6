@@ -7,7 +7,8 @@ const userRouter = express.Router({ mergeParams: true })
 userRouter.patch('/:userId', authMiddleware, async (request, response) => {
     try {
         const { userId } = request.params
-        if (userId) {
+
+        if (userId === request.user._id) {
             const updatedUser = await User.findByIdAndUpdate(userId, request.body, {
                 new: true
             })
