@@ -8,7 +8,7 @@ professionsRouter.get('/', async (request, response) => {
         const list = await Profession.find()
         response.status(200).send(list)
     } catch (error) {
-        response.status(500).json({ message: 'Server error.Try again later...' })
+        response.status(500).json({ message: 'Ошибка на сервере.Попробуйте позднее...' })
     }
 })
 
