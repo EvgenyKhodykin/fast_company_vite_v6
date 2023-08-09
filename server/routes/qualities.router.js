@@ -1,9 +1,9 @@
 import express from 'express'
 import Quality from '../models/Quality.js'
 
-const qualityRouter = express.Router({ mergeParams: true })
+const qualitiesRouter = express.Router({ mergeParams: true })
 
-qualityRouter.get('/', async (request, response) => {
+qualitiesRouter.get('/', async (request, response) => {
     try {
         const list = await Quality.find()
         response.status(200).send(list)
@@ -16,4 +16,4 @@ qualityRouter.get('/', async (request, response) => {
     }
 })
 
-export default qualityRouter
+export default qualitiesRouter
