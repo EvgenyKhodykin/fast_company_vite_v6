@@ -33,21 +33,15 @@ http.interceptors.request.use(
                 config.params = { ...config.params, auth: accessToken }
             }
         } else {
-            if (configFile.isFireBase) {
-                const containSlash = /\/$/gi.test(config.url)
-                config.url =
-                    (containSlash ? config.url.slice(0, -1) : config.url) + '.json'
-
-                if (isExpired) {
-                    const data = await authService.refreshToken()
-                    localStorageService.setTokens(data)
-                }
-                const accessToken = localStorageService.getAccessToken()
-                if (accessToken) {
-                    config.headers = {
-                        ...config.headers,
-                        Authorization: `Bearer ${accessToken}`
-                    }
+            if (isExpired) {
+                const data = await authService.refreshToken()
+                localStorageService.setTokens(data)
+            }
+            const accessToken = localStorageService.getAccessToken()
+            if (accessToken) {
+                config.headers = {
+                    ...config.headers,
+                    authorization: `Bearer ${accessToken}`
                 }
             }
         }
