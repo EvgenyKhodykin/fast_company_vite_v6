@@ -1,7 +1,6 @@
 const configFile = {
-    apiEndPoint:
-        'https://fast-company-firebase-f49fd-default-rtdb.europe-west1.firebasedatabase.app/',
-    isFireBase: true
+    apiEndPoint: 'http://localhost:8080/api',
+    isFireBase: false
 }
 
 export default configFile

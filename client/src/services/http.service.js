@@ -10,14 +10,15 @@ const http = axios.create({
 
 http.interceptors.request.use(
     async function (config) {
+        const expiresDate = localStorageService.getTokenExpiresDate()
+        const refreshToken = localStorageService.getRefreshToken()
+        const isExpired = refreshToken && expiresDate < Date.now()
+
         if (configFile.isFireBase) {
             const containSlash = /\/$/gi.test(config.url)
-            config.url =
-                (containSlash ? config.url.slice(0, -1) : config.url) + '.json'
+            config.url = (containSlash ? config.url.slice(0, -1) : config.url) + '.json'
 
-            const expiresDate = localStorageService.getTokenExpiresDate()
-            const refreshToken = localStorageService.getRefreshToken()
-            if (refreshToken && expiresDate < Date.now()) {
+            if (isExpired) {
                 const data = await authService.refreshToken()
 
                 localStorageService.setTokens({
@@ -31,7 +32,26 @@ http.interceptors.request.use(
             if (accessToken) {
                 config.params = { ...config.params, auth: accessToken }
             }
+        } else {
+            if (configFile.isFireBase) {
+                const containSlash = /\/$/gi.test(config.url)
+                config.url =
+                    (containSlash ? config.url.slice(0, -1) : config.url) + '.json'
+
+                if (isExpired) {
+                    const data = await authService.refreshToken()
+                    localStorageService.setTokens(data)
+                }
+                const accessToken = localStorageService.getAccessToken()
+                if (accessToken) {
+                    config.params = {
+                        ...config.params,
+                        Authorization: `Bearer ${accessToken}`
+                    }
+                }
+            }
         }
+
         return config
     },
     function (error) {
@@ -57,9 +77,7 @@ http.interceptors.response.use(
     },
     function expError(error) {
         const expectedErrors =
-            error.response &&
-            error.response.status >= 400 &&
-            error.response.status < 500
+            error.response && error.response.status >= 400 && error.response.status < 500
 
         if (!expectedErrors) {
             toast.error('Something wrong...')
