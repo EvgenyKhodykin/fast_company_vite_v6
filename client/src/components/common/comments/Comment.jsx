@@ -27,7 +27,7 @@ function Comment({ _id, created_at, content, userId, onRemove }) {
                                         {commentAuthor.name}
                                         <span className='small'>
                                             {' - '}
-                                            {getCommentDate(created_at)}
+                                            {getCommentDate(new Date(created_at))}
                                         </span>
                                     </p>
                                     {currentUserId === userId && (
@@ -50,7 +50,7 @@ function Comment({ _id, created_at, content, userId, onRemove }) {
 }
 
 Comment.propTypes = {
-    created_at: PropTypes.number,
+    created_at: PropTypes.string,
     content: PropTypes.string,
     userId: PropTypes.string,
     onRemove: PropTypes.func,

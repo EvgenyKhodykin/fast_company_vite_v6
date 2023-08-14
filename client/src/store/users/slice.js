@@ -92,7 +92,7 @@ export const signIn =
         try {
             const data = await authService.logIn({ email, password })
             localStorageService.setTokens(data)
-            dispatch(authRequestSuccess({ userId: data.localId }))
+            dispatch(authRequestSuccess({ userId: data.userId }))
         } catch (error) {
             const { code, message } = error.response.data.error
             if (code === 400) {

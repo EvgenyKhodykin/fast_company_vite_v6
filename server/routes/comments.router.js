@@ -12,9 +12,7 @@ commentsRouter
             const list = await Comment.find({ [orderBy]: equalTo })
             response.send(list)
         } catch (error) {
-            response
-                .status(500)
-                .json({ message: 'Ошибка на сервере.Попробуйте позднее...' })
+            response.status(500).json({ message: 'Server GET comments error' })
         }
     })
     .post(authMiddleware, async (request, response) => {
@@ -26,9 +24,7 @@ commentsRouter
 
             response.status(201).send(newComment)
         } catch (error) {
-            response
-                .status(500)
-                .json({ message: 'Ошибка на сервере.Попробуйте позднее...' })
+            response.status(500).json({ message: 'Server POST comment error' })
         }
     })
 
@@ -38,13 +34,13 @@ commentsRouter.delete('/:commentId', authMiddleware, async (request, response) =
         const removedComment = await Comment.findById(commentId)
 
         if (removedComment.userId.toString() === request.user._id) {
-            await removedComment.remove()
+            await removedComment.deleteOne()
             return response.send(null)
         } else {
             return response.status(401).json({ message: 'Unauthorized' })
         }
     } catch (error) {
-        response.status(500).json({ message: 'Ошибка на сервере.Попробуйте позднее...' })
+        response.status(500).json({ message: 'Server DELETE comment error' })
     }
 })
 

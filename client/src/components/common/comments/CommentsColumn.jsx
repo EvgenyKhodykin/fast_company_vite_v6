@@ -11,12 +11,8 @@ import {
 } from '../../../store/comments/slice'
 import Loading from '../../UI/Loading'
 import { useParams } from 'react-router-dom'
-import { nanoid } from 'nanoid'
 import { getCurrentUserId } from '../../../store/users/selectors'
-import {
-    getComments,
-    getCommentsLoadingStatus
-} from '../../../store/comments/selectors'
+import { getComments, getCommentsLoadingStatus } from '../../../store/comments/selectors'
 
 function CommentsColumn({ users }) {
     const dispatch = useDispatch()
@@ -33,7 +29,6 @@ function CommentsColumn({ users }) {
     const handleSubmitForm = data => {
         const comment = {
             ...data,
-            _id: nanoid(),
             pageId: userId,
             created_at: Date.now(),
             userId: currentUserId
@@ -49,10 +44,7 @@ function CommentsColumn({ users }) {
         <>
             <div className='card mb-2'>
                 <div className='card-body '>
-                    <AddCommentForm
-                        users={users}
-                        onSubmit={handleSubmitForm}
-                    />
+                    <AddCommentForm users={users} onSubmit={handleSubmitForm} />
                 </div>
             </div>
 
