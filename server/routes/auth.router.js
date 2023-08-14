@@ -4,7 +4,6 @@ import { check, validationResult } from 'express-validator'
 import User from '../models/User.js'
 import { generateUserData } from '../utils/helpers.js'
 import tokenService from '../services/token.service.js'
-import Token from '../models/Token.js'
 
 const authRouter = express.Router({ mergeParams: true })
 

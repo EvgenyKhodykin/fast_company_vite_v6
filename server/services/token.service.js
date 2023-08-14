@@ -1,14 +1,14 @@
-import Jwt from 'jsonwebtoken'
+import jwt from 'jsonwebtoken'
 import config from 'config'
 import Token from '../models/Token.js'
 
 class TokenService {
     generate(payload) {
-        const accessToken = Jwt.sign(payload, config.get('accessSecret'), {
+        const accessToken = jwt.sign(payload, config.get('accessSecret'), {
             expiresIn: '1h'
         })
 
-        const refreshToken = Jwt.sign(payload, config.get('refreshSecret'))
+        const refreshToken = jwt.sign(payload, config.get('refreshSecret'))
 
         return { accessToken, refreshToken, expiresIn: 3600 }
     }
@@ -25,7 +25,7 @@ class TokenService {
 
     validateRefresh(refreshToken) {
         try {
-            return Jwt.verify(refreshToken, config.get('refreshSecret'))
+            return jwt.verify(refreshToken, config.get('refreshSecret'))
         } catch (error) {
             return null
         }
@@ -33,7 +33,7 @@ class TokenService {
 
     validateAccess(accessToken) {
         try {
-            return Jwt.verify(accessToken, config.get('accessSecret'))
+            return jwt.verify(accessToken, config.get('accessSecret'))
         } catch (error) {
             return null
         }
