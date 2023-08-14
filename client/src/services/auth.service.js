@@ -3,19 +3,12 @@ import localStorageService from './localStorage.service'
 import configFile from '../config.js'
 
 const httpAuth = axios.create({
-    baseURL: configFile.apiEndPoint + '/auth/',
-    params: {
-        key: import.meta.env.VITE_REACT_APP_FIREBASE_API_KEY
-    }
+    baseURL: configFile.apiEndPoint + '/auth/'
 })
 
 const authService = {
-    register: async ({ email, password }) => {
-        const { data } = await httpAuth.post('signUp', {
-            email,
-            password,
-            returnSecureToken: true
-        })
+    register: async payload => {
+        const { data } = await httpAuth.post('signUp', payload)
         return data
     },
     logIn: async ({ email, password }) => {

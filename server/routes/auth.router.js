@@ -13,6 +13,7 @@ authRouter.post('/signUp', [
     async (request, response) => {
         try {
             const errors = validationResult(request)
+
             if (!errors.isEmpty()) {
                 return response.status(400).json({
                     error: {
@@ -26,6 +27,7 @@ authRouter.post('/signUp', [
             const { email, password } = request.body
 
             const existingUser = await User.findOne({ email })
+
             if (existingUser) {
                 return response.status(400).json({
                     error: {
@@ -42,15 +44,14 @@ authRouter.post('/signUp', [
                 ...request.body,
                 password: hashedPassword
             })
+            console.log(newUser)
 
             const tokens = tokenService.generate({ _id: newUser._id })
             await tokenService.save(newUser._id, tokens.refreshToken)
 
             response.status(201).send({ ...tokens, userId: newUser._id })
         } catch (error) {
-            response
-                .status(500)
-                .json({ message: 'Ошибка на сервере.Попробуйте позднее...' })
+            response.status(500).json({ message: 'Server singUp error...' })
         }
     }
 ])
@@ -98,9 +99,7 @@ authRouter.post('/signInWithPassword', [
 
             response.status(200).send({ ...tokens, userId: existingUser._id })
         } catch (error) {
-            response
-                .status(500)
-                .json({ message: 'Ошибка на сервере.Попробуйте позднее...' })
+            response.status(500).json({ message: 'Server signIn error...' })
         }
     }
 ])
@@ -127,7 +126,7 @@ authRouter.post('/token', async (request, response) => {
 
         response.status(200).send({ ...tokens, userId: data._id })
     } catch (error) {
-        response.status(500).json({ message: 'Ошибка на сервере.Попробуйте позднее...' })
+        response.status(500).json({ message: 'Server auth error...' })
     }
 })
 

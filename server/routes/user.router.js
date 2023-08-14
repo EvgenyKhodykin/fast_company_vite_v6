@@ -17,7 +17,7 @@ usersRouter.patch('/:userId', authMiddleware, async (request, response) => {
             response.status(401).json({ message: 'Unauthorized' })
         }
     } catch (error) {
-        response.status(500).json({ message: 'Ошибка на сервере.Попробуйте позднее...' })
+        response.status(500).json({ message: 'Server PATCH user error' })
     }
 })
 
@@ -26,7 +26,7 @@ usersRouter.get('/', authMiddleware, async (request, response) => {
         const list = await User.find()
         response.status(200).send(list)
     } catch (error) {
-        response.status(500).json({ message: 'Ошибка на сервере.Попробуйте позднее...' })
+        response.status(500).json({ message: 'Server GET users error' })
     }
 })
 
