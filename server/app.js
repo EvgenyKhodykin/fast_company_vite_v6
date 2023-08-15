@@ -3,7 +3,6 @@ import mongoose from 'mongoose'
 import config from 'config'
 import chalk from 'chalk'
 import cors from 'cors'
-import initDatabase from './startUp/initDatabase.js'
 import router from './routes/index.js'
 
 const app = express()
@@ -16,9 +15,7 @@ const PORT = config.get('port') ?? 8080
 
 async function start() {
     try {
-        mongoose.connection.once('open', () => {
-            // initDatabase()
-        })
+        mongoose.connection.once('open', () => {})
         await mongoose.connect(config.get('mongoUri'))
         console.log(chalk.yellow('MongoDB connected'))
         app.listen(PORT, () => {
