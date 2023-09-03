@@ -82,9 +82,10 @@ authRouter.post('/signInWithPassword', [
                         code: 400
                     }
                 })
+                return
             }
 
-            const isPasswordEqual = bcrypt.compare(password, existingUser.password)
+            const isPasswordEqual = await bcrypt.compare(password, existingUser.password)
             if (!isPasswordEqual) {
                 response.status(400).send({
                     error: {
@@ -92,6 +93,7 @@ authRouter.post('/signInWithPassword', [
                         code: 400
                     }
                 })
+                return
             }
 
             const tokens = tokenService.generate({ _id: existingUser._id })
